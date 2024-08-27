@@ -1,0 +1,60 @@
+
+
+CREATE OR REPLACE VIEW geodatos.ilum_pk AS
+
+ SELECT 
+	--	 ROW_NUMBER() OVER () AS gid,  -- Genera un ID único para cada fila--
+
+	ilum_postes.gid,
+    st_transform(ilum_postes.geom, 4326)::geometry(Point,4326) AS geom,
+    st_x(st_transform(ilum_postes.geom, 4326)::geometry(Point,4326)) AS longitud,
+    st_y(st_transform(ilum_postes.geom, 4326)::geometry(Point,4326)) AS latitud,
+    ilum_postes.id_tramo,
+    tramos.codigo AS cod_tramo,
+    tramos.nombre AS nom_tramo,
+    ilum_postes.id_banda,
+    bandas.codigo AS cod_banda,
+    bandas.nombre AS nom_banda,
+    ilum_postes.id_via,
+    vias.codigo AS cod_via,
+    vias.nombre AS nom_via,
+    ilum_postes.id_categ,
+    categorias.codigo AS cod_categ,
+    categorias.nombre AS nom_categ,
+    ilum_postes.id_elem,
+    elementos.nombre AS nom_elem,
+    ilum_postes.nombre,
+    ilum_postes.pk,
+	pro.pk as pk_pk,
+    ilum_postes.tipo,
+    ilum_postes.longitude,
+    ilum_postes.latitude,
+    ilum_postes.validado,
+    ilum_postes.poste_fecha,
+    ilum_postes.poste_dime,
+    ilum_postes.poste_altu,
+    ilum_postes.poste_tipo,
+    ilum_postes.tipo_de_pe,
+    ilum_postes.long_de_pe,
+    ilum_postes.luminaria,
+    ilum_postes.f_ult_interv,
+    ilum_postes.vinculo,
+    ilum_postes.obs,
+    ilum_postes.fmodif
+   FROM gisdata.ilum_postes
+     LEFT JOIN gisdata.tramos ON ilum_postes.id_tramo = tramos.id
+     LEFT JOIN gisdata.bandas ON ilum_postes.id_banda = bandas.id
+     LEFT JOIN gisdata.vias ON ilum_postes.id_via = vias.id
+     LEFT JOIN gisdata.categorias ON ilum_postes.id_categ = categorias.id
+     LEFT JOIN gisdata.elementos ON ilum_postes.id_elem = elementos.id
+	 JOIN  
+	     LATERAL (
+        SELECT 
+ pro_dump.pk -- Selecciona el campo pk de la tabla v_progresivas
+FROM 
+    (SELECT (ST_Dump(pro.geom)).geom AS geom, pro.pk FROM gisdata.v_progresivas pro) AS pro_dump
+ORDER BY 
+    ilum_postes.geom <-> pro_dump.geom -- Calcula la distancia geométrica entre los puntos de A y B
+LIMIT 1
+    ) pro ON true
+  WHERE ilum_postes.activo = true;
