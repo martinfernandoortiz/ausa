@@ -1,5 +1,5 @@
-
 CREATE OR REPLACE VIEW geodatos.v_incidentes AS
+
 WITH joined_data AS (
     SELECT
         i.*,
@@ -24,12 +24,9 @@ SELECT
     jd.*
 FROM
     gisdata.v_progresivas vp
-RIGHT JOIN
+INNER JOIN
     joined_data jd
 ON
     vp.cod_tramo = jd.tramo_cod
-    AND vp.cod_banda = jd.eje_desc
-    AND vp.pk_numerica = CASE
-                            WHEN jd.pk ~ '^[0-9]+$' THEN jd.pk::integer
-                            ELSE NULL
-                         END;
+  --  AND vp.cod_banda = jd.eje_desc
+    AND vp.pk = jd.pk_arreglada
