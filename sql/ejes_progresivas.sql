@@ -47,3 +47,15 @@ GROUP BY
     id_tramo;
 
 
+select s.km, pro.pk as pk1 from formularios.v_mant_electrico_powerbi s 
+	JOIN LATERAL (
+        SELECT pro_dump.pk FROM 
+    		(SELECT (ST_Dump(pro.geom)).geom AS geom, pro.pk 
+				FROM gisdata.v_progresivas pro) AS pro_dump
+ORDER BY 
+    s.geom <-> pro_dump.geom -- Calcula la distancia geométrica entre los puntos de A y B
+LIMIT 1
+    ) pro ON true
+--where s.kb_id=316524142
+
+
