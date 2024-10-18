@@ -1,0 +1,65 @@
+-- VIEW CHECK PK
+DROP VIEW geodatos.v_mant_obra_civil_check;
+
+
+CREATE OR REPLACE VIEW geodatos.v_mant_obra_civil_check as
+select 
+	v_mant_obra_civil.fecha_carga,
+    v_mant_obra_civil.kb_id,
+    v_mant_obra_civil.fecha,
+    v_mant_obra_civil.kb_uuid,
+    v_mant_obra_civil.obs,
+    v_mant_obra_civil.latitud,
+    v_mant_obra_civil.longitud,
+    v_mant_obra_civil.nom_tramo,
+    v_mant_obra_civil.nom_banda,
+    v_mant_obra_civil.nom_via,
+    v_mant_obra_civil.zonatraza,
+v_mant_obra_civil.km, 
+    pk_auto,
+    replace(pk_auto, '+', '.')::numeric AS pk_auto_numeric,
+    
+    -- Arreglo para pk con diferentes longitudes
+    CASE 
+        -- pk con 1 o 2 dígitos
+        WHEN POSITION('.' IN km::text) = 0 AND LENGTH(km::text) IN (1, 2) 
+            THEN km::text || '.000'
+        
+        -- pk con 3 dígitos
+        WHEN POSITION('.' IN km::text) = 0 AND LENGTH(km::text) = 3 
+            THEN '0.' || km::text
+        
+        -- pk con 4 dígitos
+        WHEN POSITION('.' IN km::text) = 0 AND LENGTH(km::text) = 4  
+            THEN LEFT(km::text, 1) || '.' || RIGHT(km::text, 3)
+        
+        -- pk con 5 dígitos
+        WHEN POSITION('.' IN km::text) = 0 AND LENGTH(km::text) = 5  
+            THEN LEFT(km::text, 2) || '.' || RIGHT(km::text, 3)
+        
+        ELSE km::text
+    END AS pk_fix,
+    
+    -- Cálculo de la diferencia entre pk_fix y pk_auto
+    (CASE 
+        -- pk con 1 o 2 dígitos
+        WHEN POSITION('.' IN km::text) = 0 AND LENGTH(km::text) IN (1, 2) 
+            THEN km::text || '.000'
+        
+        -- pk con 3 dígitos
+        WHEN POSITION('.' IN km::text) = 0 AND LENGTH(km::text) = 3 
+            THEN '0.' || km::text
+        
+        -- pk con 4 dígitos
+        WHEN POSITION('.' IN km::text) = 0 AND LENGTH(km::text) = 4  
+            THEN LEFT(km::text, 1) || '.' || RIGHT(km::text, 3)
+        
+        -- pk con 5 dígitos
+        WHEN POSITION('.' IN km::text) = 0 AND LENGTH(km::text) = 5  
+            THEN LEFT(km::text, 2) || '.' || RIGHT(km::text, 3)
+        
+        ELSE km::text
+    END)::numeric - replace(pk_auto, '+', '.')::numeric AS diferencia,
+	v_mant_obra_civil.geom
+	
+	from formularios.v_mant_obra_civil  
