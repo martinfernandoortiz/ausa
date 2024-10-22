@@ -23,12 +23,13 @@ GRANT ALL ON SEQUENCE formularios.inspec_moc_def_fid_seq TO postgres;
 SELECT setval('formularios.inspec_moc_def_fid_seq', (SELECT MAX(fid) FROM formularios.inspec_moc_def)); */
 
 	
-INSERT INTO formularios.inspec_moc_def (item, ubicacion,progresiva,hojas,postes,prioridad,observaciones,fecha,autopista2,kb_lonlat,tipo_inspeccion,select_activo,kb_id,geom)
+INSERT INTO formularios.inspec_moc_def (item,banda, ubicacion,progresiva,hojas,postes,prioridad,observaciones,fecha,autopista2,kb_lonlat,tipo_inspeccion,select_activo,kb_id,geom)
 SELECT         
 		item, 
+		banda,
 		ubicacion_nro_columna,
 		km,
-	  hojas,
+	 	hojas,
 		postes,
 		prioridad,
 		ubicacion_banda,
