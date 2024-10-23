@@ -302,76 +302,179 @@ DROP VIEW formularios.v_inspec_moc_def_powerbi;
 DROP MATERIALIZED VIEW IF EXISTS formularios.v_inspec_moc_def;
 DROP VIEW formularios.v_inspec_moc_pav_powerbi;
 
-DROP MATERIALIZED VIEW IF EXISTS formularios.v_inspec_moc_pav;
 
-CREATE MATERIALIZED VIEW IF NOT EXISTS formularios.v_inspec_moc_def
+DROP MATERIALIZED VIEW IF EXISTS formularios.v_inspec_moc_def_BORRAR;
+CREATE MATERIALIZED VIEW IF NOT EXISTS formularios.v_inspec_moc_def_BORRAR
 TABLESPACE pg_default
 AS
  SELECT 
-	v.fid,
-	v.fecha,
-	v.cod_tramo,
-	v.via_cod,
-	v.banda,
-	v.ubicacion,
-	v.progresiva,
-	v.item,
-	v.prioridad,
-	v.postes,
-	v.hojas,
+	distinct v.fid as gid, 
+	v.fecha as fecha_carga,
 	v.tipo_inspeccion,
-	v.kb_id,
-	v.id_ejecucion,
-	v.observaciones,
-	lat,
-	lon,
-	v.geom
+
+	  CASE
+            WHEN v.tipo_inspeccion::text = 'mensual'::text THEN v.item
+            ELSE 0::numeric
+        END AS item,
+
+    v_zonas_pavimentos.cod_tramo,
+    v_zonas_pavimentos.nom_tramo,
+
+        CASE
+            WHEN v.banda = 'A' THEN 'Centro'::text
+            WHEN v.banda = 'B' THEN 'Provincia'::text
+            WHEN v.banda = 'S'::text THEN 'Sur'::text
+            WHEN v.banda = 'N'::text THEN 'Norte'::text
+            WHEN v.cod_tramo = 'MET'::text THEN 'Bidireccional'::text
+            ELSE v.banda
+        END AS nom_banda,
+		v.via_cod as cod_via,
+	case when 
+			v.via_cod = 'PPL' then 'Principal'
+			when v.via_cod='RCA' then 'Ramal de enlace'
+			else null end as nom_via,
+
+
+v_zonas_pavimentos.zonatraza,
+
+	v.progresiva as km,
+	v.observaciones as ubicacion_banda,
+	v.ubicacion as ubicacion_nro_columna,
+	 CASE
+            WHEN v.hojas IS NOT NULL THEN v.hojas
+            ELSE 0::numeric
+        END AS hojas,
+        CASE
+            WHEN v.hojas > 0::numeric THEN v.hojas * 7.62
+            ELSE 0::numeric
+        END AS largo_m,
+        CASE
+            WHEN v.postes IS NOT NULL THEN v.postes
+            ELSE 0::numeric
+        END AS postes,
+	        CASE
+            WHEN v.prioridad::text = 'peligroso'::text THEN 'Planificada a la brevedad'::text
+            WHEN v.prioridad::text = 'no_peligroso'::text THEN 'Planificada'::text
+            ELSE NULL::text
+        END AS prioridad,
+		v.lat as latitud,
+		v.lon as longitud,
+		v.geom as geom,
+	        CASE
+            WHEN v.id_ejecucion::text <> 'n/a'::text THEN ('<a href=''https://maps.ausa.com.ar/services/forms/edit/?uid=a9hd6fBnx7yy56Q3hCErip&id='::text || v.id_ejecucion::text) || '&'' target=''_blank''>Editar registro relacionado en KoboToolBox</a>'::text
+            ELSE NULL::text
+        END AS linkeditorrelativo
+
 from formularios.inspec_moc v
+   LEFT JOIN gisdata.v_zonas_pavimentos ON v.cod_tramo::text = v_zonas_pavimentos.cod_tramo::text
+
 	where select_activo ='Defensa';
 
-ALTER TABLE IF EXISTS formularios.v_inspec_moc_def
+
+ALTER TABLE IF EXISTS formularios.v_inspec_mant_obra_civil_defe
     OWNER TO postgres;
 
-GRANT SELECT ON TABLE formularios.v_inspec_moc_def TO ausa_reader;
-GRANT ALL ON TABLE formularios.v_inspec_moc_def TO postgres;
-
+GRANT SELECT ON TABLE formularios.v_inspec_mant_obra_civil_defe TO ausa_reader;
+GRANT ALL ON TABLE formularios.v_inspec_mant_obra_civil_defe TO postgres;
 
 
 
 -- Vista PowerBI
 
+DROP VIEW formularios.v_inspec_mant_obra_civil_defe_powerbi;
 
-CREATE OR REPLACE VIEW formularios.v_inspec_moc_def_powerbi
+CREATE OR REPLACE VIEW formularios.v_inspec_mant_obra_civil_defe_powerbi
  AS
- SELECT 
-	v.fid,
-	v.fecha,
-	v.cod_tramo,
-	v.via_cod,
-	v.banda,
-	v.ubicacion,
-	v.progresiva,
-	v.item,
-	v.prioridad,
-	v.postes,
-	v.hojas,
-	v.tipo_inspeccion,
-	v.kb_id,
-	v.id_ejecucion,
-	v.observaciones,
-	v.lat,
-	v.lon,
-	v.geom
-   FROM formularios.v_inspec_moc_def v;
-
-ALTER TABLE formularios.v_inspec_moc_def_powerbi
+ SELECT v.gid,
+    v.fecha_carga,
+    v.tipo_inspeccion,
+    v.item,
+    v.cod_tramo,
+    v.nom_tramo,
+    v.nom_banda,
+    v.cod_via,
+    v.nom_via,
+    v.zonatraza,
+    v.km,
+    v.ubicacion_banda,
+    v.ubicacion_nro_columna,
+    v.hojas,
+    v.largo_m,
+    v.postes,
+    v.prioridad,
+   -- v.observaciones as obs,
+    v.latitud,
+    v.longitud,
+    v.geom,
+    v.linkeditorrelativo
+   FROM formularios.v_inspec_moc_def_BORRAR v;
+ALTER TABLE formularios.v_inspec_mant_obra_civil_defe_powerbi
     OWNER TO postgres;
-COMMENT ON VIEW formularios.v_inspec_moc_def_powerbi
+COMMENT ON VIEW formularios.v_inspec_mant_obra_civil_defe_powerbi
     IS 'Vista compatible con PowerBI';
 
-GRANT SELECT ON TABLE formularios.v_inspec_moc_def_powerbi TO ausa_reader;
-GRANT ALL ON TABLE formularios.v_inspec_moc_def_powerbi TO postgres;
-GRANT ALL ON TABLE formularios.v_inspec_moc_def_powerbi TO powerbi_reader;
+GRANT SELECT ON TABLE formularios.v_inspec_mant_obra_civil_defe_powerbi TO ausa_reader;
+GRANT ALL ON TABLE formularios.v_inspec_mant_obra_civil_defe_powerbi TO postgres;
+GRANT ALL ON TABLE formularios.v_inspec_mant_obra_civil_defe_powerbi TO powerbi_reader;
+
+
+
+
+
+DROP MATERIALIZED VIEW IF EXISTS formularios.v_inspec_moc_pav_BORRAR;
+CREATE MATERIALIZED VIEW IF NOT EXISTS formularios.v_inspec_moc_pav_BORRAR
+TABLESPACE pg_default
+AS
+ SELECT 
+	distinct v.fid as gid, 
+	v.fecha as fecha_carga,
+	v.tipo_inspeccion,
+	  CASE WHEN v.tipo_inspeccion::text = 'mensual'::text THEN v.item
+            ELSE 0::numeric
+        END AS item,
+    v_zonas_pavimentos.cod_tramo,
+    v_zonas_pavimentos.nom_tramo,
+        CASE
+            WHEN v.banda = 'A' THEN 'Centro'::text
+            WHEN v.banda = 'B' THEN 'Provincia'::text
+            WHEN v.banda = 'S'::text THEN 'Sur'::text
+            WHEN v.banda = 'N'::text THEN 'Norte'::text
+            WHEN v.cod_tramo = 'MET'::text THEN 'Bidireccional'::text
+            ELSE v.banda
+        END AS nom_banda,
+		v.via_cod as cod_via,
+	case when via_cod = 'PPL' then 'Principal'
+			when v.via_cod='RCA' then 'Ramal de enlace'
+			else null end as nom_via,
+    v_zonas_pavimentos.id_zona_traza,
+    v_zonas_pavimentos.zonatraza,
+	v.progresiva as km,
+	v.carril,
+	v.observaciones as ubicacion_banda,
+	v.ubicacion as ubicacion_nro_columna,
+	      CASE WHEN v.prioridad::text = 'peligroso'::text THEN 'Planificada a la brevedad'::text
+            WHEN v.prioridad::text = 'no_peligroso'::text THEN 'Planificada'::text
+            ELSE NULL::text
+        END AS prioridad,
+		v.lat as latitud,
+		v.lon as longitud,
+		v.geom as geom,
+	        CASE
+            WHEN v.id_ejecucion::text <> 'n/a'::text THEN ('<a href=''https://maps.ausa.com.ar/services/forms/edit/?uid=a9hd6fBnx7yy56Q3hCErip&id='::text || v.id_ejecucion::text) || '&'' target=''_blank''>Editar registro relacionado en KoboToolBox</a>'::text
+            ELSE NULL::text
+        END AS linkeditorrelativo
+
+from formularios.inspec_moc v
+   LEFT JOIN gisdata.v_zonas_pavimentos ON v.cod_tramo::text = v_zonas_pavimentos.cod_tramo::text
+	where select_activo ='Pavimento';
+
+
+ALTER TABLE IF EXISTS formularios.v_inspec_moc_pav_BORRAR
+    OWNER TO postgres;
+
+GRANT SELECT ON TABLE formularios.v_inspec_moc_pav_BORRAR TO ausa_reader;
+GRANT ALL ON TABLE formularios.v_inspec_moc_pav_BORRAR TO postgres;
+
 
 
 
@@ -383,73 +486,35 @@ SELECT setval('formularios.inspec_moc_def_fid_seq', (SELECT MAX(fid) FROM formul
 */
 
 
-DROP VIEW formularios.v_inspec_moc_pav_powerbi;
 
-DROP MATERIALIZED VIEW IF EXISTS formularios.v_inspec_moc_pav;
-
-CREATE MATERIALIZED VIEW IF NOT EXISTS formularios.v_inspec_moc_pav
-TABLESPACE pg_default
-AS
- SELECT 
-	v.fid,
-	v.fecha,
-	v.cod_tramo,
-	v.via_cod,
-	v.banda,
-	v.ubicacion,
-	v.progresiva,
-	v.item,
-	v.prioridad,
-	v.tipo_inspeccion,
-	v.kb_id,
-	v.id_ejecucion,
-	v.observaciones,
-	lat,
-	lon,
-	v.geom
-from formularios.inspec_moc v
-	where select_activo ='Pavimento';
-
-ALTER TABLE IF EXISTS formularios.v_inspec_moc_pav
-    OWNER TO postgres;
-
-GRANT SELECT ON TABLE formularios.v_inspec_moc_pav TO ausa_reader;
-GRANT ALL ON TABLE formularios.v_inspec_moc_pav TO postgres;
-
-
-
-
--- Vista PowerBI
-
-
-CREATE OR REPLACE VIEW formularios.v_inspec_moc_pav_powerbi
+CREATE OR REPLACE VIEW formularios.v_inspec_mant_obra_civil_pavi_powerbi
  AS
  SELECT 
-	v.fid,
-	v.fecha,
-	v.cod_tramo,
-	v.via_cod,
-	v.banda,
-	v.ubicacion,
-	v.progresiva,
-	v.item,
-	v.prioridad,
-	v.tipo_inspeccion,
-	v.kb_id,
-	v.id_ejecucion,
-	v.observaciones,
-	v.lat,
-	v.lon,
-	v.geom
-   FROM formularios.v_inspec_moc_def v;
+ v.gid,
+    v.fecha_carga,
+    v.tipo_inspeccion,
+    v.item,
+    v.cod_tramo,
+    v.nom_tramo,
+    v.nom_banda,
+    v.cod_via,
+    v.nom_via,
+    v.id_zona_traza,
+    v.zonatraza,
+    v.km,
+    v.carril,
+    v.prioridad,
+    v.latitud,
+    v.longitud,
+    v.geom,
+    v.linkeditorrelativo
+   FROM formularios.v_inspec_moc_pav_BORRAR v;
 
-ALTER TABLE formularios.v_inspec_moc_pav_powerbi
+ALTER TABLE formularios.v_inspec_mant_obra_civil_pavi_powerbi
     OWNER TO postgres;
-COMMENT ON VIEW formularios.v_inspec_moc_pav_powerbi
+COMMENT ON VIEW formularios.v_inspec_mant_obra_civil_pavi_powerbi
     IS 'Vista compatible con PowerBI';
 
-GRANT SELECT ON TABLE formularios.v_inspec_moc_pav_powerbi TO ausa_reader;
-GRANT ALL ON TABLE formularios.v_inspec_moc_pav_powerbi TO postgres;
-GRANT ALL ON TABLE formularios.v_inspec_moc_pav_powerbi TO powerbi_reader;
-
-
+GRANT SELECT ON TABLE formularios.v_inspec_mant_obra_civil_pavi_powerbi TO ausa_reader;
+GRANT ALL ON TABLE formularios.v_inspec_mant_obra_civil_pavi_powerbi TO postgres;
+GRANT ALL ON TABLE formularios.v_inspec_mant_obra_civil_pavi_powerbi TO powerbi_reader;
