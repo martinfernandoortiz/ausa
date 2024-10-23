@@ -300,6 +300,9 @@ SET via_cod = case when id_tramo =99 then 'RCA'
 DROP VIEW formularios.v_inspec_moc_def_powerbi;
 
 DROP MATERIALIZED VIEW IF EXISTS formularios.v_inspec_moc_def;
+DROP VIEW formularios.v_inspec_moc_pav_powerbi;
+
+DROP MATERIALIZED VIEW IF EXISTS formularios.v_inspec_moc_pav;
 
 CREATE MATERIALIZED VIEW IF NOT EXISTS formularios.v_inspec_moc_def
 TABLESPACE pg_default
@@ -324,7 +327,7 @@ AS
 	lon,
 	v.geom
 from formularios.inspec_moc v
-	where select_activo ='Defensa'
+	where select_activo ='Defensa';
 
 ALTER TABLE IF EXISTS formularios.v_inspec_moc_def
     OWNER TO postgres;
@@ -448,6 +451,5 @@ COMMENT ON VIEW formularios.v_inspec_moc_pav_powerbi
 GRANT SELECT ON TABLE formularios.v_inspec_moc_pav_powerbi TO ausa_reader;
 GRANT ALL ON TABLE formularios.v_inspec_moc_pav_powerbi TO postgres;
 GRANT ALL ON TABLE formularios.v_inspec_moc_pav_powerbi TO powerbi_reader;
-
 
 
