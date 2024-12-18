@@ -15,3 +15,6 @@
  
 ## archivos abiertos
 ``` lsof -u apache ```
+## renovar certificados
+``` certbot renew ```
+``` service tomcat restart ```
