@@ -1,50 +1,77 @@
 import os
 from datetime import datetime
 
+def sanitize_filename(filename):
+    """
+    Reemplaza caracteres problemáticos en el nombre del archivo.
+    """
+    return filename.replace("ñ", "n")
+
+def replace_autopista_names(video_url):
+    """
+    Reemplaza nombres largos de autopistas por sus códigos.
+    """
+    replacements = {
+        "Autopista 25 de mayo": "AU1",
+        "Autopista Dellepiane": "AUD",
+        "Autopista ILLIA": "AU2",
+        "Autopista Perito Moreno": "AU6",
+        "Autopista Presidente Arturo Frondizi": "AU9",
+        "Autopista Presidente Hector Jose Campora": "AU7",
+        "Paseo del bajo": "PDB",
+    }
+    for long_name, short_code in replacements.items():
+        video_url = video_url.replace(long_name, short_code)
+    return video_url
+
 def generate_sql_for_videos(base_folder, base_url):
+    """
+    Genera los comandos SQL para insertar información sobre los videos.
+    """
     sql_commands = []
 
-    for root, dirs, files in os.walk(base_folder):
-        for file_name in files:
-            if file_name.lower().endswith(('.mp4', '.mkv', '.avi', '.mov')):  # Filtrar solo videos
+    for root, _, files in os.walk(base_folder):
+        for file in files:
+            # Sanitizar el nombre del archivo
+            sanitized_file = sanitize_filename(file)
+
+            if sanitized_file.lower().endswith(('.mp4', '.mkv', '.avi', '.mov')):
+                video_name, _ = os.path.splitext(sanitized_file)
+                video_url = os.path.relpath(os.path.join(root, sanitized_file), base_folder).replace("\\", "/")
+
+                # Aplicar los reemplazos en el video_url
+                video_url = replace_autopista_names(video_url)
+
                 try:
-                    # Extraer partes del nombre del archivo
-                    name_without_extension = os.path.splitext(file_name)[0]
-                    
-                    # Validar si los primeros 6 caracteres son una fecha
-                    date_part = name_without_extension[:6]
-                    autopista_part = name_without_extension[7:10]
+                    # Extraer la fecha y autopista
+                    date_part = video_name[:6]
+                    fecha = datetime.strptime(date_part, "%y%m%d").strftime("20%y-%m-%d")
+                    autopista = video_name[7:10]
 
-                    if len(date_part) == 6 and date_part.isdigit():
-                        fecha = datetime.strptime(date_part, "%y%m%d").strftime("20%y-%m-%d")
-                    else:
-                        print(f"Saltando archivo no válido para fecha: {file_name}")
-                        continue
-
-                    # Construir el video_url y el comando SQL
-                    video_url = os.path.relpath(os.path.join(root, file_name), base_folder).replace("\\", "/")
-                    video_url = f"{base_url}/{video_url}"
-
-                    sql_command = f"INSERT INTO usuarios.videos (video, video_url, fecha, autopista) " \
-                                  f"VALUES ('{name_without_extension}', '{video_url}', '{fecha}', '{autopista_part}');"
-                    sql_commands.append(sql_command)
-
-                except Exception as e:
-                    print(f"Error procesando el archivo {file_name}: {e}")
-
+                    # Generar el comando SQL
+                    sql = (
+                        f"INSERT INTO usuarios.videos (video, video_url, fecha, autopista) "
+                        f"VALUES ('{video_name}', '{video_url}', '{fecha}', '{autopista}');"
+                    )
+                    sql_commands.append(sql)
+                except (ValueError, IndexError):
+                    print(f"Error procesando el archivo: {sanitized_file}. Verifica su formato.")
     return sql_commands
 
+def save_sql_to_file(sql_commands, output_file):
+    """
+    Guarda los comandos SQL generados en un archivo.
+    """
+    with open(output_file, "w", encoding="utf-8") as f:
+        f.write("\n".join(sql_commands))
+    print(f"SQL guardado en: {output_file}")
 
-# Configuración de la carpeta base y la URL base
-base_folder = r"\\ausafs\Repositorio GIS\01-Recorridos GoPro\01-Videos\12-Gopro 9 Black\01-videos\FEB2024"
-base_url = "https://proweb.ausa.com.ar/videos"
+if __name__ == "__main__":
+    # Configurar rutas y base URL
+    base_folder = r"\\ausafs\Repositorio GIS\01-Recorridos GoPro\01-Videos\12-Gopro 9 Black\01-videos\FEB2024"
+    base_url = "/mnt/servidor_archivos/videos"
+    output_file = os.path.join(base_folder, "insert_videos.sql")
 
-# Generar las sentencias SQL
-sql_commands = generate_sql_for_videos(base_folder, base_url)
-
-# Guardar las sentencias SQL en un archivo
-output_file = os.path.join(base_folder, "insert_videos.sql")
-with open(output_file, "w") as file:
-    file.write("\n".join(sql_commands))
-
-print(f"Archivo SQL generado: {output_file}")
+    # Generar y guardar los comandos SQL
+    sql_commands = generate_sql_for_videos(base_folder, base_url)
+    save_sql_to_file(sql_commands, output_file)
