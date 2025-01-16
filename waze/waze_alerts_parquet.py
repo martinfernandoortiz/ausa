@@ -1,5 +1,5 @@
-import os
 import requests
+import os
 import pandas as pd
 import schedule
 import time
@@ -51,7 +51,9 @@ def process_lines_irregularities(irregularities):
         if 'line' in irregularity:
             # Generar la geometría de tipo LINESTRING
             coordinates = irregularity['line']
-            line_string = "LINESTRING(" + ", ".join(f"{coord['x']} {coord['y']}" for coord in coordinates) + ")"
+            line_string = "LINESTRING("
+            line_string += ", ".join(f"{coord['x']} {coord['y']}" for coord in coordinates)
+            line_string += ")"
             
             line = {
                 'unique_id': irregularity.get('uuid', None),
@@ -71,7 +73,9 @@ def process_lines_jams(jams):
         if 'line' in jam:
             # Generar la geometría de tipo LINESTRING
             coordinates = jam['line']
-            line_string = "LINESTRING(" + ", ".join(f"{coord['x']} {coord['y']}" for coord in coordinates) + ")"
+            line_string = "LINESTRING("
+            line_string += ", ".join(f"{coord['x']} {coord['y']}" for coord in coordinates)
+            line_string += ")"
             
             line = {
                 'unique_id': jam.get('uuid', None),
@@ -84,18 +88,27 @@ def process_lines_jams(jams):
     return lines_df
 
 # Función para guardar DataFrame en Parquet
-def save_to_parquet(df, prefix):
+def save_to_parquet(df, prefix, directory):
     if df.empty:
         print(f"[{datetime.now()}] No hay datos para guardar en {prefix}.")
         return
 
     try:
+        # Crear el directorio si no existe
+        os.makedirs(directory, exist_ok=True)
+        
+        # Generar un nombre único usando la marca de tiempo
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         file_name = f"{prefix}_{timestamp}.parquet"
-        df.to_parquet(file_name, index=False)
-        print(f"[{datetime.now()}] Datos guardados en {file_name}.")
+        file_path = os.path.join(directory, file_name)
+        
+        # Guardar el DataFrame en formato Parquet
+        df.to_parquet(file_path, index=False)
+        print(f"[{datetime.now()}] Datos guardados en {file_path}.")
     except Exception as e:
         print(f"[{datetime.now()}] Error al guardar {prefix} en Parquet: {e}")
+        
+
 
 # Función principal
 def run_task():
@@ -104,7 +117,11 @@ def run_task():
     if not data:
         print("No se pudo procesar el JSON.")
         return
-
+    #Directorios
+    points_directory = "waze_points"
+    irregularities_directory = "waze_lines_irregularities"
+    jams_directory = "waze_lines_jams"
+    
     # Extraer datos del JSON
     alerts = data.get('alerts', [])
     irregularities = data.get('irregularities', [])
@@ -112,15 +129,15 @@ def run_task():
 
     # Procesar y guardar puntos
     points_df = process_points(alerts)
-    save_to_parquet(points_df, "waze_points")
+    save_to_parquet(points_df, "waze_points", points_directory)
 
     # Procesar y guardar líneas de irregularidades
     lines_df_irregularities = process_lines_irregularities(irregularities)
-    save_to_parquet(lines_df_irregularities, "waze_lines_irregularities")
+    save_to_parquet(lines_df_irregularities, "waze_lines_irregularities",irregularities_directory)
 
     # Procesar y guardar líneas de jams
     lines_df_jams = process_lines_jams(jams)
-    save_to_parquet(lines_df_jams, "waze_lines_jams")
+    save_to_parquet(lines_df_jams, "waze_lines_jams",jams_directory)
 
 # Programar la tarea
 schedule.every(5).minutes.do(run_task)
