@@ -7,7 +7,7 @@ import time
 import os
 
 # URL del feed de Waze
-FEED_URL = "https://www.waze.com/row-partnerhub-api/partners/18865151823/waze-feeds/c73c7a3c-fe6d-4062-a225-1a379619d767?format=2"
+FEED_URL = "PONER EL FEED"
 
 # Definir los namespaces
 NAMESPACES = {
