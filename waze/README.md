@@ -1,5 +1,5 @@
 # Waze
-## Sets de scripts para procesar la info
+## Sets de scripts para procesar el feed de waze
 
 ### waze_script.py
 Parsea el xml y genera alerts, jams e irregularities. <br>
