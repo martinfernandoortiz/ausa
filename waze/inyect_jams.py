@@ -19,7 +19,7 @@ DB_TABLE = "jams"
 
 # Conexión a la base de datos
 engine = create_engine(f"postgresql+psycopg2://{DB_USER}:{DB_PASSWORD}@{DB_HOST}/{DB_NAME}")
-"""
+
 
 parquet_file = "/home/waze/data/sintesis/output_parquet/jams_geo.parquet"
 
@@ -78,7 +78,7 @@ df_aggregated = df_filtered.groupby('uuid', group_keys=False).apply(aggregate_da
 df_aggregated["geom"] = df_aggregated["geom"].apply(lambda x: loads(x) if isinstance(x, (bytes, bytearray)) else x)
 
 df_aggregated = gpd.GeoDataFrame(df_aggregated, geometry='geom')
-"""
+
 #print(df_aggregated.head())
 #df_aggregated.to_parquet("output_geoparquet/borrar.parquet", engine='pyarrow')
 
