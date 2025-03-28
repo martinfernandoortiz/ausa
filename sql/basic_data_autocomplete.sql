@@ -1,0 +1,121 @@
+ --Intersección para completar id banda, tramo y via. 
+-- Aca es un triger pero abajo de todo pongo para la ejecucion. Lleva su tiempo, habria que filtrar lo que ya esta completo para que lleve menos tiempo
+
+-- Paso 1: Eliminar la vista materializada existente (si aplica)
+DROP MATERIALIZED VIEW IF EXISTS gisdata.exclusion_zones_mv;
+
+-- Paso 2: Crear la vista materializada con IDs únicos
+CREATE MATERIALIZED VIEW gisdata.exclusion_zones_mv AS
+WITH zonas AS (
+    SELECT 
+        ST_CollectionExtract(
+            ST_MakeValid(
+                ST_Union(
+                    ST_Intersection(
+                        ST_Buffer(a.geom, 0.001),
+                        ST_Buffer(b.geom, 0.001)
+                    )
+                )
+            ),
+            3
+        ) AS geom
+    FROM gisdata.bandas_geo a
+    JOIN gisdata.bandas_geo b 
+        ON ST_Intersects(a.geom, b.geom)
+        AND a.id < b.id
+)
+SELECT 
+    ROW_NUMBER() OVER (ORDER BY geom) AS id,  -- Genera IDs después de descomponer
+    geom::geometry(Polygon, 5348) AS geom
+FROM (
+    SELECT (ST_Dump(geom)).geom 
+    FROM zonas
+) AS subquery;
+
+-- Paso 3: Crear índices
+CREATE UNIQUE INDEX idx_exclusion_zones_mv_id 
+    ON gisdata.exclusion_zones_mv (id);
+CREATE INDEX idx_exclusion_zones_mv_geom 
+    ON gisdata.exclusion_zones_mv USING GIST (geom);
+
+-----------------------------------------------------------------------
+-----------------------------------------------------------------------
+
+
+CREATE OR REPLACE FUNCTION gisdata.update_spatial_attributes()
+RETURNS TRIGGER AS $$
+DECLARE
+    target_schema TEXT := TG_TABLE_SCHEMA;
+    target_table TEXT := TG_TABLE_NAME;
+    punto geometry(Point, 5348);
+BEGIN
+    -- Paso 1: Verificar si está en zona de exclusión (paréntesis corregido)
+    IF NOT EXISTS (
+        SELECT 1 
+        FROM gisdata.exclusion_zones_mv ez 
+        WHERE ST_Intersects(NEW.geom, ez.geom)
+    ) THEN  -- ¡Paréntesis de cierre añadido aquí!
+        punto := ST_PointOnSurface(NEW.geom);
+    ELSE
+        RETURN NEW;
+    END IF;
+
+    -- Paso 2: Actualizar campos
+    EXECUTE format('
+        UPDATE %I.%I 
+        SET 
+            id_tramo = sub.id_tramo,
+            id_via = sub.id_via,
+            id_banda = sub.id_banda
+        FROM (
+            SELECT 
+                id_tramo,
+                id_via,
+                id_banda
+            FROM gisdata.bandas_geo 
+            WHERE ST_Intersects($1, geom)
+            ORDER BY geom <-> $1
+            LIMIT 1
+        ) AS sub
+        WHERE id = $2',
+        target_schema, target_table)
+    USING punto, NEW.id;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_update_spatial_attributes
+BEFORE INSERT OR UPDATE OF geom ON gisdata.carriles_pol
+FOR EACH ROW
+EXECUTE FUNCTION gisdata.update_spatial_attributes();
+
+
+
+
+
+
+
+
+-----------------------------------------------------------------------
+-- PARA ACTIVARLO AUTOMATICAMENTE
+CREATE OR REPLACE FUNCTION refresh_exclusion_zones()
+RETURNS TRIGGER AS $$
+BEGIN
+  REFRESH MATERIALIZED VIEW CONCURRENTLY gisdata.exclusion_zones_mv;
+  RETURN NULL;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_refresh_exclusion_zones
+AFTER INSERT OR UPDATE OR DELETE ON gisdata.bandas_geo
+FOR EACH STATEMENT
+EXECUTE FUNCTION refresh_exclusion_zones();
+
+-----------------------------------------------------------------------
+-----------------------------------------------------------------------
+-----------------------------------------------------------------------
+-- EJECUCION DEL TRIGER
+WITH exclusion_zones AS (
+  SELECT geom FROM gisdata.exclusion_zones_mv
+)
