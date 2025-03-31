@@ -1,9 +1,9 @@
 -- Completar tramo, via, banda automaticamente excluyendo zonas de interseccion con distribuidores
--- Paso 2: Generar puntos solo en áreas no excluidas
+
 WITH carrile_points AS (
     SELECT 
         c.id,
-        ST_PointOnSurface(c.geom)::geometry(Point, 5348) AS punto  -- Mismo SRID
+        ST_PointOnSurface(c.geom)::geometry(Point, 5348) AS punto  -- Asegurar mismo SRID
     FROM gisdata.velocidades c
     WHERE NOT EXISTS (
         SELECT 1
@@ -12,23 +12,23 @@ WITH carrile_points AS (
     )
 )
 
--- Paso 3: Actualización con verificación SRID
 UPDATE gisdata.velocidades AS cp
 SET 
     id_tramo = b.id_tramo,
     id_via = b.id_via,
-	id_banda =b.id_banda
+    id_banda = b.id_banda
 FROM (
     SELECT DISTINCT ON (cp.id)
-        cp.id,
+        cp.id,  -- Asegurar relación con velocidades
         b.id_tramo,
         b.id_via,
-		b.id_banda,
+        b.id_banda,
         ST_Distance(cp.punto, b.geom) AS distancia
     FROM carrile_points cp
     JOIN gisdata.bandas_geo b 
-        ON ST_Intersects(cp.punto, b.geom)
-        AND ST_SRID(cp.punto) = ST_SRID(b.geom)  -- Verificar SRID
+        ON ST_Intersects(cp.punto, b.geom)  
+        AND ST_SRID(cp.punto) = ST_SRID(b.geom)  
     WHERE ST_IsValid(cp.punto)
-    ORDER BY cp.id, distancia ASC  -- Priorizar banda más cercana
+    ORDER BY cp.id, distancia ASC 
 ) AS b
+WHERE cp.id = b.id; 
