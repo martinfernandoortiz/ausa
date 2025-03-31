@@ -1,4 +1,4 @@
- --Intersección para completar id banda, tramo y via. 
+ --Intersección para completar id banda, tramo y via sacando las zonas de exclusion
 -- Aca es un triger pero abajo de todo pongo para la ejecucion. Lleva su tiempo, habria que filtrar lo que ya esta completo para que lleve menos tiempo
 
 -- Paso 1: Eliminar la vista materializada existente (si aplica)
