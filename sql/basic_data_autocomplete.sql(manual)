@@ -1,53 +1,32 @@
 -- Completar tramo, via, banda automaticamente excluyendo zonas de interseccion con distribuidores
 
-WITH exclusion_zones AS (
-    SELECT 
-        ROW_NUMBER() OVER () AS id,
-        (ST_Dump(
-            ST_CollectionExtract(
-                ST_MakeValid(
-                    ST_Union(
-                        ST_Intersection(
-                            ST_Buffer(a.geom, 0.001),  -- Tolerancia de 1mm
-                            ST_Buffer(b.geom, 0.001)
-                        )
-                    ),
-                3  -- Solo polígonos
-            )
-        )).geom::geometry(Polygon, 5348) AS geom  -- SRID explícito
-    FROM gisdata.bandas_geo a
-    JOIN gisdata.bandas_geo b 
-        ON ST_Intersects(a.geom, b.geom)
-        AND a.id < b.id
-    WHERE NOT ST_IsEmpty(ST_Intersection(a.geom, b.geom))
-),
-
 -- Paso 2: Generar puntos solo en áreas no excluidas
-carrile_points AS (
+WITH carrile_points AS (
     SELECT 
         c.id,
         ST_PointOnSurface(c.geom)::geometry(Point, 5348) AS punto  -- Mismo SRID
-    FROM gisdata.carriles_pol c
+    FROM gisdata.velocidades c
     WHERE NOT EXISTS (
         SELECT 1
-        FROM exclusion_zones ez
+        FROM gisdata.v_exclusion_zones ez
         WHERE ST_Intersects(c.geom, ez.geom)
     )
 )
 
 -- Paso 3: Actualización con verificación SRID
-UPDATE gisdata.carriles_pol AS cp
+UPDATE gisdata.velocidades AS cp
 SET 
     id_tramo = b.id_tramo,
-    id_via = b.id_via
+    id_via = b.id_via,
+	id_banda =b.id_banda
 FROM (
     SELECT DISTINCT ON (cp.id)
         cp.id,
         b.id_tramo,
         b.id_via,
         ST_Distance(cp.punto, b.geom) AS distancia
-    FROM carrile_points cp
-    JOIN gisdata.bandas b 
+    FROM velocidades cp
+    JOIN gisdata.bandas_geo b 
         ON ST_Intersects(cp.punto, b.geom)
         AND ST_SRID(cp.punto) = ST_SRID(b.geom)  -- Verificar SRID
     WHERE ST_IsValid(cp.punto)
