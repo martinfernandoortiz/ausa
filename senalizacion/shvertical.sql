@@ -95,8 +95,6 @@ VALUES
 
 
 
-
--- Reglamentarias - Prohibición
 INSERT INTO senializacion.senales (codigo, nombre, descripcion, subelemento_id, forma, contenido)
 VALUES
 ('R1', 'No avanzar', 'Señal que indica que no se permite avanzar en la dirección señalada', 1, 'Circular', ''),
@@ -107,7 +105,7 @@ VALUES
 ('R3(3)', 'Prohibido de circular (bicicletas)', 'Prohíbe la circulación de bicicletas', 1, 'Circular', ''),
 ('R3(4)', 'Prohibido de circular (camión)', 'Prohíbe la circulación de camiones', 1, 'Circular', ''),
 ('R3(5)', 'Prohibido de circular (acoplado)', 'Prohíbe la circulación de acoplados', 1, 'Circular', ''),
-('R3(6)', 'Prohibido de circular (peatones'), 'Restringe el paso de peatones en el área', 1, 'Circular', 'No peatones'),
+('R3(6)', 'Prohibido de circular (peatones)', 'Restringe el paso de peatones en el área', 1, 'Circular', 'No peatones'),
 ('R3(7)', 'Prohibido de circular (carro tracción animal)', 'Prohíbe la circulación de vehículos de tracción animal', 1, 'Circular', ''),
 ('R3(8)', 'Prohibido de circular (arreos o manadas)', 'Prohíbe la circulación de vehículos de arreos', 1, 'Circular', ''),
 ('R3(9)', 'Prohibido de circular (carro mano)', 'Prohíbe la circulación de vehículos de carro mano', 1, 'Circular', ''),
@@ -116,6 +114,19 @@ VALUES
 ('R4(b)', 'No girar a la derecha', 'Prohibe el giro a la derecha', 1, 'Circular', ''),
 ('R5', 'No girar en "U" (no retomar)', 'Prohíbe realizar un giro en U', 1, 'Circular', ''),
 ('R6', 'Prohibido adelantar', 'Prohíbe adelantamiento de autos', 1, 'Circular', ''),
+('R7', 'No ruidos molestos', 'Prohíbe el uso de bocina y emisiones sonoras',1, 'Circular', ''),
+('R8', 'No estacionar', 'Prohíbe estacionar vehículos. Letra "E" tachada. Puede incluir horarios o flechas.',1, 'Circular', ''),
+('R9', 'No estacionar ni detenerse', 'Prohíbe detener el vehículo en cualquier circunstancia. Letra "E" y "D" tachadas.', 1,'Circular', ''),
+('R10', 'Prohibición de cambio de carril', 'Prohíbe cambiar de carril', 1,'Circular', ''),
+('R11(a)', 'Limitación de peso','Prohíbe el paso a vehículos cuyo peso exceda el valor indicado.', 2,'Circular','' ),
+('R11(b)', 'Limitación de peso por eje', 'Prohíbe el paso a vehículos cuyo peso exceda el valor indicado.', 2,'Circular', ''),
+('R12', 'Limitación de altura', 'Prohíbe el paso a vehículos que sobrepasen la altura indicada.', 2,'Circular', 'Altura en m'),
+('R13', 'Limitación de ancho', 'Prohíbe el paso a vehículos que sobrepasen el ancho indicado.', 2,'Circular', 'Ancho en m'),
+('R14', 'Limitación de largo','Prohíbe el paso a vehículos que excedan el largo indicado.', 2,'Circular', 'Largo en m'),
+('R15', 'Límite de velocidad máxima', 'Prohíbe circular a velocidades superiores a la indicada.',2, 'Circular', 'Velocidad (km/h)'),
+('R16', 'Límite de velocidad mínima', 'Prohíbe circular a velocidades inferiores a la indicada.',2, 'Circular', 'Velocidad (km/h)')
+
+
 
 
 
