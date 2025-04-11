@@ -39,19 +39,22 @@ CREATE TABLE senializacion.senales (
     nombre TEXT NOT NULL,
     descripcion TEXT,
     subelemento_id INTEGER REFERENCES senializacion.subelementos(id),
-    forma TEXT,
-    dimensiones TEXT,
-    soporte TEXT,
-    contenido TEXT,
-    imagen TEXT,
+    forma TEXT, -- cuadrado, rectangular, circular
+    dimensiones TEXT, -- esta no iria, sino en la de gis
+    soporte TEXT, -- esta no iria, sino que va en la de gis
+    contenido TEXT, -- cuando hay muchos casos va a la tabla de senal modificadores
+    imagen TEXT, -- tiene que ser generica
     observaciones TEXT
 );
 
 CREATE TABLE senializacion.senal_modificadores (
     id SERIAL PRIMARY KEY,
     senal_id INTEGER REFERENCES senializacion.senales(id),
-    tipo TEXT,         -- ejemplo: "texto adicional", "tipo vehículo", "horario", etc.
-    valor TEXT         -- ejemplo: "solo camiones", "excepto emergencia", "de 22 a 6 hs"
+	contenido TEXT,
+	tipo_vehículo TEXT,         -- ejemplo: "texto adicional", "tipo vehículo", "horario", etc.
+	leyenda_extra TEXT, -- ejemplo: valor de velocidad 60, 40 ,etc
+    valor TEXT,         -- ejemplo: "solo camiones", "excepto emergencia", "de 22 a 6 hs"
+	imagen TEXT
 );
 
 
@@ -64,6 +67,7 @@ CREATE TABLE senializacion.senializacionvertical (
     -- Relaciones clave
     id_tramo BIGINT REFERENCES gisdata.tramos(id),
     id_banda BIGINT REFERENCES gisdata.bandas(id),
+	id_via BIGINT REFERENCES gisdata. n
     id_senal INTEGER NOT NULL REFERENCES senializacion.senales(id),
     
     -- Datos físicos del cartel
@@ -292,86 +296,62 @@ INSERT INTO senializacion.senales (codigo, nombre, descripcion, forma, subelemen
 
 
 
-
+select * from senializacion.senal_modificadores
 
 
 --Para insertar los modificadores
 WITH r15 AS (
-    SELECT id FROM geodatos.senales WHERE codigo = 'R15'
+    SELECT id FROM senializacion.senales WHERE codigo = 'R15'
 )
 
 -- Insertar modificadores para R15
-INSERT INTO geodatos.senal_modificadores (senal_id, tipo, valor)
-SELECT id, 'tipo vehículo', 'solo camiones' FROM r15
+INSERT INTO senializacion.senal_modificadores (senal_id, contenido, tipo_vehículo,leyenda_extra,imagen)
+SELECT id, 20,'' , '','r15(20)' FROM r15
 UNION ALL
-SELECT id, 'texto adicional', 'excepto vehículos de emergencia' FROM r15
+SELECT id, 30,'' , 'MAXIMA','r15(30)1' FROM r15
 UNION ALL
-SELECT id, 'valor variable', '12 t' FROM r15
+SELECT id, 40,'' , '','r15(40)' FROM r15
 UNION ALL
-SELECT id, 'horario', 'de 22 a 6 hs' FROM r15;
+SELECT id, 40,'' , 'MAXIMA','r15(40)1'FROM r15
+UNION ALL
+SELECT id, 40,'' , 'VELOCIDAD MAXIMA','r15(40)2'FROM r15
+UNION ALL
+SELECT id, 60,'' , '','r15(60)'FROM r15
+UNION ALL
+SELECT id, 60,'' , 'MAXIMA','r15(60)1'FROM r15
+UNION ALL
+SELECT id, 60,'' , 'VELOCIDAD MAXIMA','r15(60)2'FROM r15
+UNION ALL
+SELECT id, 60,'CAMIONES' , 'MAXIMA','r15(60)3'FROM r15
+UNION ALL
+SELECT id, 70,'' , '','r15(70)'FROM r15
+UNION ALL
+SELECT id, 80,'' , '','r15(80)'FROM r15
+UNION ALL
+SELECT id, 80,'' , 'MAXIMA','r15(80)1'FROM r15
+UNION ALL
+SELECT id, 80,'' , 'VELOCIDAD MAXIMA','r15(80)2'FROM r15
+UNION ALL
+SELECT id, 100,'' , '','r15(100)'FROM r15
+UNION ALL
+SELECT id, 100,'' , 'MAXIMA','r15(100)1'FROM r15
+UNION ALL
+SELECT id, 100,'' , 'VELOCIDAD MAXIMA','r15(100)2'FROM r15
+UNION ALL
+SELECT id, 60,'METROBUS' , '','r15(60)4'FROM r15
 
 
+--Para insertar los modificadores
+WITH r15 AS (
+    SELECT id FROM senializacion.senales WHERE codigo = 'R16'
+)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-CREATE OR REPLACE VIEW geodatos.vw_senializacionvertical_detalle AS
-SELECT
-    sv.id,
-    sv.id_tramo,
-    sv.id_banda,
-    sv.id_senal,
-
-    -- Datos desde catálogo
-    s.codigo AS codigo_senal,
-    s.nombre AS nombre_senal,
-    s.descripcion,
-    s.forma AS forma_catalogo,
-    s.contenido AS contenido_catalogo,
-
-    sub.nombre AS subelemento,
-    e.nombre AS elemento,
-    c.nombre AS categoria,
-
-    -- Datos de instalación / gestión
-    sv.forma,
-    sv.dimensiones,
-    sv.soporte,
-    sv.id_soporte,
-    sv.estado,
-    sv.pk,
-    sv.contenido,
-    sv.imagen,
-    sv.vinculo,
-    sv.obs,
-    sv.activo,
-    sv.f_instalacion,
-    sv.f_ult_interv,
-    sv.fmodif,
-    sv.create_timestamp,
-    sv.edit_timestamp,
-    sv.delete_timestamp,
-    sv.create_user,
-    sv.edit_user,
-    sv.delete_user,
-    sv.padre,
-    sv.area,
-    sv.geom
-
-FROM
-    geodatos.senializacionvertical sv
-    JOIN senializacion.senales s ON sv.id_senal = s.id
-    JOIN senializacion.subelementos sub ON s.subelemento_id = sub.id
-    JOIN senializacion.elementos e ON sub.elemento_id = e.id
-    JOIN senializacion.categorias c ON e.categoria_id = c.id;
+-- Insertar modificadores para R16
+INSERT INTO senializacion.senal_modificadores (senal_id, contenido, tipo_vehículo,leyenda_extra,imagen)
+SELECT id, '50','' , '','r16(50)' FROM r15
+UNION ALL
+SELECT id, 50,'' , 'MINIMA','r16(50)1' FROM r15
+UNION ALL
+SELECT id, 50,'' , 'VELOCIDAD MINIMA','r16(50)2'FROM r15
+UNION ALL
+SELECT id, 00,'' , '','r16'FROM r15
