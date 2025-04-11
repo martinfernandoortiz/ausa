@@ -51,7 +51,7 @@ CREATE TABLE senializacion.senal_modificadores (
     id SERIAL PRIMARY KEY,
     senal_id INTEGER REFERENCES senializacion.senales(id),
 	contenido TEXT,
-	tipo_vehículo TEXT,         -- ejemplo: "texto adicional", "tipo vehículo", "horario", etc.
+	tipo_vehiculo TEXT,         -- ejemplo: "texto adicional", "tipo vehículo", "horario", etc.
 	leyenda_extra TEXT, -- ejemplo: valor de velocidad 60, 40 ,etc
     valor TEXT,         -- ejemplo: "solo camiones", "excepto emergencia", "de 22 a 6 hs"
 	imagen TEXT
@@ -59,7 +59,6 @@ CREATE TABLE senializacion.senal_modificadores (
 
 
 
-CREATE SCHEMA IF NOT EXISTS geodatos;
 
 CREATE TABLE senializacion.senializacionvertical (
     id SERIAL PRIMARY KEY,
@@ -67,8 +66,9 @@ CREATE TABLE senializacion.senializacionvertical (
     -- Relaciones clave
     id_tramo BIGINT REFERENCES gisdata.tramos(id),
     id_banda BIGINT REFERENCES gisdata.bandas(id),
-	id_via BIGINT REFERENCES gisdata. n
     id_senal INTEGER NOT NULL REFERENCES senializacion.senales(id),
+	id_modificador INTEGER NOT NULL REFERENCES senializacion.senal_modificadores(id),
+
     
     -- Datos físicos del cartel
     forma VARCHAR(20),
@@ -81,8 +81,6 @@ CREATE TABLE senializacion.senializacionvertical (
     pk VARCHAR(6),
     contenido VARCHAR(254),
     imagen VARCHAR(254),
-    vinculo VARCHAR(254),
-    obs VARCHAR(254),
     activo BOOLEAN DEFAULT TRUE,
 
     -- Fechas de gestión
@@ -178,7 +176,7 @@ VALUES
 ('R13', 'Limitación de ancho', 'Prohíbe el paso a vehículos que sobrepasen el ancho indicado.', 2,'Circular', 'Ancho en m'),
 ('R14', 'Limitación de largo','Prohíbe el paso a vehículos que excedan el largo indicado.', 2,'Circular', 'Largo en m'),
 ('R15', 'Límite de velocidad máxima', 'Prohíbe circular a velocidades superiores a la indicada.',2, 'Circular', 'Velocidad (km/h)'),
-('R16', 'Límite de velocidad mínima', 'Prohíbe circular a velocidades inferiores a la indicada.',2, 'Circular', 'Velocidad (km/h)')
+('R16', 'Límite de velocidad mínima', 'Prohíbe circular a velocidades inferiores a la indicada.',2, 'Circular', 'Velocidad (km/h)');
 
 
 
@@ -219,12 +217,6 @@ INSERT INTO senializacion.senales (codigo, nombre, descripcion, forma, subelemen
 
 
 
-
-
-
-('R17', 'Distancia mínima entre vehículos', 'Obliga a mantener una distancia mínima entre vehículos.', 'Circular', 3),
-('R18', 'Restricción por tipo de carga', 'Prohíbe circular con cargas peligrosas u otras categorías restringidas.', 'Circular', 3),
-('R19', 'Restricción por uso exclusivo', 'Señal que restringe la circulación a ciertos vehículos (ej. "solo colectivos", "solo bicicletas").', 'Circular', 3);
 
 
 
@@ -296,9 +288,6 @@ INSERT INTO senializacion.senales (codigo, nombre, descripcion, forma, subelemen
 
 
 
-select * from senializacion.senal_modificadores
-
-
 --Para insertar los modificadores
 WITH r15 AS (
     SELECT id FROM senializacion.senales WHERE codigo = 'R15'
@@ -355,3 +344,123 @@ UNION ALL
 SELECT id, 50,'' , 'VELOCIDAD MINIMA','r16(50)2'FROM r15
 UNION ALL
 SELECT id, 00,'' , '','r16'FROM r15
+
+
+
+-- Vamos a popular senializacion.senializacionvertical
+
+
+
+INSERT INTO senializacion.senializacionvertical (     
+    id_tramo,
+    id_banda,
+    id_senal,
+	id_modificador,  
+    -- Datos físicos del cartel
+    forma,
+    dimensiones,
+    soporte,
+    id_soporte,
+    -- Información operativa
+    estado,
+    pk,
+    contenido,
+
+   -- activo,
+
+    -- Fechas de gestión
+    f_instalacion,
+    f_ult_interv,
+    geom
+)
+
+SELECT
+    sv.id_tramo,
+    sv.id_banda,
+    sm.senal_id,
+	sm.id ,
+    -- Datos físicos del cartel
+    sv.forma,
+    sv.dimensiones,
+    sv.soporte,
+    sv.id_soporte,
+    
+    -- Información operativa
+    sv.estado,
+    sv.pk,
+    sm.contenido,
+
+    -- Fechas de gestión
+    sv.f_instalacion,
+    sv.f_ult_interv,
+
+    sv.geom
+
+
+FROM
+    gisdata.v_senializacionvertical sv
+JOIN
+    senializacion.senal_modificadores sm
+    ON UPPER(REPLACE(sv.iconografia, '.png', '')) = UPPER(sm.imagen)
+WHERE
+    sv.iconografia ILIKE 'R15%' OR sv.iconografia ILIKE 'R16%';
+
+
+
+
+select *
+FROM
+    gisdata.v_senializacionvertical sv
+
+WHERE
+    sv.iconografia ILIKE 'R15%' OR sv.iconografia ILIKE 'R16%';
+
+
+
+
+
+
+
+
+CREATE OR REPLACE VIEW senializacion.v_senializacionvertical_velocidades AS
+
+SELECT
+    v.id_tramo,
+    v.id_banda,
+    v.id_senal,
+    v.id,
+    cat.nombre AS categoria,
+    ele.nombre AS elemento,
+    ele.obs AS obs_elemento,
+    sub.nombre AS subelemento,
+    sen.codigo,
+    sen.nombre AS senal,
+    sen.descripcion,
+    sm.contenido AS contenido,
+    sm.tipo_vehiculo,
+    sm.leyenda_extra,
+    sm.imagen AS imagen_modificador,
+    v.forma,
+    v.dimensiones,
+    v.soporte,
+    v.id_soporte,
+    v.estado,
+    v.pk,
+    v.contenido AS contenido_vertical,
+    v.f_instalacion,
+    v.f_ult_interv,
+    v.geom
+FROM
+    senializacion.senializacionvertical v
+JOIN senializacion.senal_modificadores sm 
+    ON v.id_modificador = sm.id
+JOIN senializacion.senales sen 
+    ON sm.senal_id = sen.id
+JOIN senializacion.subelementos sub 
+    ON sen.subelemento_id = sub.id
+JOIN senializacion.elementos ele 
+    ON sub.elemento_id = ele.id
+JOIN senializacion.categorias cat 
+    ON ele.id_categoria = cat.id_categoria
+WHERE
+    sen.codigo IN ('R15','R16');  -- Corregido el cierre de comillas
