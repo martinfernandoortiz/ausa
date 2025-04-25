@@ -1,3 +1,106 @@
+-- Table: geodatos.estadopavimentos2025
+
+-- DROP TABLE IF EXISTS geodatos.estadopavimentos2025;
+
+CREATE TABLE IF NOT EXISTS geodatos.estadopavimentos2025
+(
+    id integer NOT NULL DEFAULT nextval('geodatos.estadopavimentos2025_id_seq'::regclass),
+    geom geometry(Point,4326),
+    "AU" character varying COLLATE pg_catalog."default",
+    "CARRIL_S/RELEV" integer,
+    "SENTIDO" character varying COLLATE pg_catalog."default",
+    "CARRIL_AUSA" integer,
+    "PK_INICIO" double precision,
+    "PK_FIN" double precision,
+    "LATITUD" double precision,
+    "LONGITUD" double precision,
+    "AHU_(MM)" double precision,
+    "RUG_(IRI_M/KM)" double precision,
+    "FISURA_LINEAL_(M)" character varying COLLATE pg_catalog."default",
+    "FISURACION_TIPO" character varying COLLATE pg_catalog."default",
+    "FISURACION_porcentaje" character varying COLLATE pg_catalog."default",
+    "BACHES_m2" double precision,
+    "PEL_DESP_m2" double precision,
+    "BACHEO_m2" double precision,
+    field_17 character varying COLLATE pg_catalog."default",
+    "ESTADO DE JUNTAS_BIEN" double precision,
+    "ESTADO DE JUNTAS_REGULAR" double precision,
+    "ESTADO DE JUNTAS_MAL" double precision,
+    "TOTAL DETERIOROS_SUP" double precision,
+    "TOTAL DE DETERIOROS_%" character varying COLLATE pg_catalog."default",
+    "PARAMETROS_D1" integer,
+    "PARAMETROS_D2" integer,
+    "PARAMETROS_D3" integer,
+    "PARAMETROS_D4" integer,
+    "INDICE_DE_ESTADO" double precision,
+    "INDICE_DE_SERVICIAB_PRESENTE" double precision,
+    "OBSERVACIONES" character varying COLLATE pg_catalog."default",
+    fisura double precision,
+    id_tramo bigint,
+    id_banda bigint,
+    CONSTRAINT estadopavimentos2025_pkey PRIMARY KEY (id)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS geodatos.estadopavimentos2025
+    OWNER to postgres;
+-- Index: sidx_estadopavimentos2025_geom
+
+-- DROP INDEX IF EXISTS geodatos.sidx_estadopavimentos2025_geom;
+
+CREATE INDEX IF NOT EXISTS sidx_estadopavimentos2025_geom
+    ON geodatos.estadopavimentos2025 USING gist
+    (geom)
+    TABLESPACE pg_default;
+
+
+
+
+	
+
+
+UPDATE geodatos.estadopavimentos2025 AS pav
+SET 
+
+id_tramo = case when "AU" = 'DEL' then 6  
+when "AU" ='9JS'  then 7
+when "AU" ='RA3'	then 14
+when "AU" ='RA2' then 14
+when "AU" ='ILL' then 3
+when "AU" ='25M' then 1
+when "AU" = 'MBS' then 2
+when "AU" ='CAN' then 9
+when "AU" ='PDB' then 8
+when "AU" ='LUG' then 10
+when "AU" ='PEM'   then 4
+when "AU" ='CAM'  then 5 END ;
+
+UPDATE geodatos.estadopavimentos2025 AS pav
+SET 
+
+id_banda = case when "SENTIDO" = 'A' and id_tramo in (6,7,14,1,4,5) then 1  -- todo menos met, pdb, illi, aca,lug
+ when "SENTIDO" = 'D' and id_tramo in (6,7,14,1,4,5) then 2  -- todo menos met, pdb, illi, aca,lug
+ when "SENTIDO" = 'D' and id_tramo in (8) then 5  --pdb
+when "SENTIDO" = 'A' and id_tramo in (8) then 6  --pdb
+ when "SENTIDO" = 'A' and id_tramo in (3) then 2  --illia
+ when "SENTIDO" = 'D' and id_tramo in (3) then 1  --illia
+ when  id_tramo in (9) then 2  --illia
+when  id_tramo in (10) then 1
+end --illia end
+
+when "AU" ='9JS'  then 7
+when "AU" ='RA3'	then 14
+when "AU" ='RA2' then 14
+when "AU" ='ILL' then 3
+when "AU" ='25M' then 1
+when "AU" = 'MBS' then 2
+when "AU" ='CAN' then 9
+when "AU" ='PDB' then 8
+when "AU" ='LUG' then 10
+when "AU" ='PEM'   then 4
+when "AU" ='CAM'  then 5 END ;
+
 
 
 SELECT "FISURA_LINEAL_(M)"
@@ -29,6 +132,8 @@ END;
 
 
 INSERT INTO gisdata.estadopavimentos2025 (
+id_tramo,
+id_banda,
     geom, 
     carril, 
     latitude, 
@@ -58,6 +163,8 @@ INSERT INTO gisdata.estadopavimentos2025 (
     "TOTAL DE DETERIOROS_%" 
 )
 SELECT  
+id_tramo,
+id_banda,
     st_transform(geom,5348),
     "CARRIL_AUSA",
     "LATITUD"::NUMERIC,
@@ -87,3 +194,22 @@ SELECT
     ROUND(REPLACE( "TOTAL DETERIOROS_SUP"::VARCHAR , ',', '.')::NUMERIC, 1),
     ROUND(REPLACE(TRIM("TOTAL DE DETERIOROS_%" ), ',', '.')::NUMERIC, 1)
 FROM geodatos.estadopavimentos2025;
+
+
+
+
+UPDATE geodatos.estadopavimentos2025
+SET id_categ = CASE 
+    WHEN  "FISURACION_porcentaje" ~ '^[0-9 ,.-]+$' THEN 
+        ROUND(REPLACE(TRIM( "FISURACION_porcentaje"), ',', '.')::NUMERIC, 1)
+    ELSE 
+        NULL 
+END;
+
+
+UPDATE gisdata.estadopavimentos2025
+SET id_categ = 12; 
+
+UPDATE gisdata.estadopavimentos2025
+SET id_elem = 167; 
+
