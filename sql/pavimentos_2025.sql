@@ -213,3 +213,71 @@ SET id_categ = 12;
 UPDATE gisdata.estadopavimentos2025
 SET id_elem = 167; 
 
+
+
+-- View: gisdata.v_estadopavimentos2018
+
+-- DROP VIEW gisdata.v_estadopavimentos2018;
+
+CREATE OR REPLACE VIEW gisdata.v_estadopavimentos2025
+ AS
+ SELECT estadopavimentos2025.gid,
+    estadopavimentos2025.id,
+    st_transform(estadopavimentos2025.geom, 4326)::geometry(Point,4326) AS geom,
+    longitude AS longitud,
+    latitude AS latitud,
+    estadopavimentos2025.id_tramo,
+    tramos.codigo AS cod_tramo,
+    tramos.nombre AS nom_tramo,
+    estadopavimentos2025.id_banda,
+    bandas.codigo AS cod_banda,
+    bandas.nombre AS nom_banda,
+    estadopavimentos2025.id_categ,
+    categorias.codigo AS cod_categ,
+    categorias.nombre AS nom_categ,
+    estadopavimentos2025.id_elem,
+    elementos.nombre AS nom_elem,
+    estadopavimentos2025.carril,
+    estadopavimentos2025.latitude,
+    estadopavimentos2025.longitude,
+    estadopavimentos2025.elevation,
+    estadopavimentos2025.desde_km,
+    estadopavimentos2025.hasta_km,
+    estadopavimentos2025.pk,
+    estadopavimentos2025.iri,
+    estadopavimentos2025.ahuellam,
+    estadopavimentos2025.d1,
+    estadopavimentos2025.d2,
+    estadopavimentos2025.d3,
+    estadopavimentos2025.cant,
+    estadopavimentos2025.fisur_m,
+    estadopavimentos2025.field_27,
+    estadopavimentos2025.sellado,
+    estadopavimentos2025.bache_m2,
+    estadopavimentos2025.field_30,
+    estadopavimentos2025.est_bache,
+    estadopavimentos2025.pelad_m2,
+    estadopavimentos2025.field_33,
+    estadopavimentos2025.d4,
+    estadopavimentos2025.nota1,
+    estadopavimentos2025.nota2,
+    estadopavimentos2025.carp_rod,
+    estadopavimentos2025.fecha_ejecucion,
+    estadopavimentos2025.ult_int,
+    estadopavimentos2025.ie,
+    estadopavimentos2025.isp,
+    estadopavimentos2025.imagen,
+    estadopavimentos2025.vinculo,
+    estadopavimentos2025.obs
+   FROM gisdata.estadopavimentos2025
+     LEFT JOIN gisdata.tramos ON estadopavimentos2025.id_tramo = tramos.id
+     LEFT JOIN gisdata.bandas ON estadopavimentos2025.id_banda = bandas.id
+     LEFT JOIN gisdata.categorias ON estadopavimentos2025.id_categ = categorias.id
+     LEFT JOIN gisdata.elementos ON estadopavimentos2025.id_elem = elementos.id;
+
+ALTER TABLE gisdata.v_estadopavimentos2025
+    OWNER TO postgres;
+
+GRANT ALL ON TABLE gisdata.v_estadopavimentos2025 TO mcastillo;
+GRANT ALL ON TABLE gisdata.v_estadopavimentos2025 TO postgres;
+GRANT SELECT ON TABLE gisdata.v_estadopavimentos2025 TO sololectura;
