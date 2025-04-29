@@ -60,6 +60,7 @@ CREATE TABLE senializacion.senal_modificadores (
 
 
 
+
 CREATE TABLE senializacion.senializacionvertical (
     id SERIAL PRIMARY KEY,
     
@@ -77,9 +78,12 @@ CREATE TABLE senializacion.senializacionvertical (
     id_soporte INTEGER,
     
     -- Información operativa
+    contenido VARCHAR(254),
+    tipo_vehiculo VARCHAR(254),
+    leyenda_extra VARCHAR(254),
     estado VARCHAR(24),
     pk VARCHAR(6),
-    contenido VARCHAR(254),
+    
     imagen VARCHAR(254),
     activo BOOLEAN DEFAULT TRUE,
 
@@ -765,4 +769,3 @@ JOIN
     ON upper (REPLACE(left(sv.nom_elem,2),'I','I.')) = UPPER(sm.codigo)
 WHERE
     sv.nom_elem ILIKE 'I6%' ;
-
