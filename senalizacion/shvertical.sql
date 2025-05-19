@@ -425,6 +425,8 @@ INSERT INTO senializacion.senales (codigo, nombre, descripcion,subelemento_id, f
 ('I.22(e)', 'DIRECCION PERMITIDA (ambas direcciones)', 'se puede seguir en cualquiera de los sentidos que indique la señal', 12, 'Circular'), 
 
 ('I.22(f)', 'DIRECCION PERMITIDA (bifurcación)', 'se puede seguir en cualquiera de los sentidos que indique la señal', 12, 'Circular');
+('I.25)', 'Anuncios', 'se puede seguir en cualquiera de los sentidos que indique la señal', 12, 'Circular');
+
 
 
 
