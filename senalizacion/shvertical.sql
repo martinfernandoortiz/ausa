@@ -366,65 +366,65 @@ INSERT INTO senializacion.senales (codigo, nombre, descripcion,subelemento_id, f
 -- Señales Informativas
 INSERT INTO senializacion.senales (codigo, nombre, descripcion,subelemento_id, forma) VALUES
 ('I.1', 'RUTA PANAMERICANA', 'Pertenece al sistema panamericano de carreteras', 1, '-------------'), 
-('I.2', 'RUTA NACIONAL', 'Indica a la ruta como perteneciente a la red nacional de caminos e informa la denominación de la vía por la que circula y ocasionalmente se indica el nombre de la provincia donde se allá ubicada', 1, 'Pentagonal'), 
+('I.2', 'RUTA NACIONAL', 'Indica a la ruta como perteneciente a la red nacional de caminos e informa la denominación de la vía por la que circula y ocasionalmente se indica el nombre de la provincia donde se allá ubicada', 10, 'Pentagonal'), 
 
-('I.3', 'RUTA PROVINCIAL', 'Indica a la ruta como perteneciente a la red provincial, se coloca completando otras señales de información', 1, 'Cuadrangular'), 
+('I.3', 'RUTA PROVINCIAL', 'Indica a la ruta como perteneciente a la red provincial, se coloca completando otras señales de información', 10, 'Cuadrangular'), 
 
-('I.4(a)', 'NOMENCLATURA URBANA', 'Indica y orienta el lugar donde se encuentra, indica la denominación, la numeración catastral y el sentido de circulación', 1, 'Rectangular'), 
+('I.4(a)', 'NOMENCLATURA URBANA', 'Indica y orienta el lugar donde se encuentra, indica la denominación, la numeración catastral y el sentido de circulación', 10, 'Rectangular'), 
 
-('I.4(b)', 'NOMENCLATURA URBANA', 'Indica y orienta el lugar donde se encuentra, indica la denominación, la numeración catastral y el sentido de circulación', 1, 'Rectangular'), 
+('I.4(b)', 'NOMENCLATURA URBANA', 'Indica y orienta el lugar donde se encuentra, indica la denominación, la numeración catastral y el sentido de circulación', 10, 'Rectangular'), 
 
-('I.5', 'IDENTIFICACION DE REGION Y LOCALIDAD', 'Indica la llegada a una región, localidad o población determinada', 1, 'Rectangular'), 
+('I.5', 'IDENTIFICACION DE REGION Y LOCALIDAD', 'Indica la llegada a una región, localidad o población determinada', 10, 'Rectangular'), 
 
-('I.6', 'ORIENTACION (en caminos primarios y secundarios)', 'Indica las localidades o parajes a encontrar sobre la vía que se circula.', 1, 'Rectangular'), 
+('I.6', 'ORIENTACION (en caminos primarios y secundarios)', 'Indica las localidades o parajes a encontrar sobre la vía que se circula.', 10, 'Rectangular'), 
 
-('I.7', 'ORIENTACION (en caminos secundarios)', 'Indica las localidades o parajes a encontrar sobre la vía que se circula.', 1, 'Rectangular'), 
+('I.7', 'ORIENTACION (en caminos secundarios)', 'Indica las localidades o parajes a encontrar sobre la vía que se circula.', 10, 'Rectangular'), 
 
-('I.8', 'COMIENZO O FIN DE ZONA URBANA', 'Indica el comienzo o fin de zona urbana, pudiendo tener el nombre de la localidad que se trata', 1, 'Rectangular'), 
+('I.8', 'COMIENZO O FIN DE ZONA URBANA', 'Indica el comienzo o fin de zona urbana, pudiendo tener el nombre de la localidad que se trata', 10, 'Rectangular'), 
 
-('I.9', 'IDENTIFICACION DE JURIDICCION O ACCIDENTE', 'Indica la localidad, sus límites jurisdiccionales o accidentes geográficos por los que atraviesa la vía', 1, 'Rectangular'), 
+('I.9', 'IDENTIFICACION DE JURIDICCION O ACCIDENTE', 'Indica la localidad, sus límites jurisdiccionales o accidentes geográficos por los que atraviesa la vía', 10, 'Rectangular'), 
 
-('I.10', 'MOJON KILOMETRICO', 'Indica la distancia en kilómetros al punto tomado como origen de la vía, medida sobre su trazo', 1, '-------------'), 
+('I.10', 'MOJON KILOMETRICO', 'Indica la distancia en kilómetros al punto tomado como origen de la vía, medida sobre su trazo', 10, '-------------'), 
 
-('I.11', 'NOMENCLATURA DE AUTOPISTA', 'Indica la denominación de la autopista por la que se circula o la cual se atraviesa o accede', 1, 'Rectangular'), 
+('I.11', 'NOMENCLATURA DE AUTOPISTA', 'Indica la denominación de la autopista por la que se circula o la cual se atraviesa o accede', 10, 'Rectangular'), 
 
-('I.12', 'COMIENZO DE AUTOPISTA', 'Indica proximidad o el ramal de acceso a una autopista', 1, 'Rectangular'), 
+('I.12', 'COMIENZO DE AUTOPISTA', 'Indica proximidad o el ramal de acceso a una autopista', 12, 'Rectangular'), 
 
-('I.13', 'FIN DE AUTOPISTA', 'Indica finalización de la autopista', 1, 'Rectangular'), 
+('I.13', 'FIN DE AUTOPISTA', 'Indica finalización de la autopista', 12, 'Rectangular'), 
 
-('I.14', 'INDICADORA DE UTILIZACION DE CARRILES', 'Indica el tipo de vehículos que pueden circular por cada uno de los carriles', 1, 'Rectangular'), 
+('I.14', 'INDICADORA DE UTILIZACION DE CARRILES', 'Indica el tipo de vehículos que pueden circular por cada uno de los carriles', 12, 'Rectangular'), 
 
-('I.15(a)', 'CAMINO O CALLE SIN SALIDA', 'Indica la finalización de la calle o camino', 1, 'Rectangular'), 
+('I.15(a)', 'CAMINO O CALLE SIN SALIDA', 'Indica la finalización de la calle o camino', 12, 'Rectangular'), 
 
-('I.15(b)', 'CAMINO O CALLE SIN SALIDA', 'Indica la finalización de la calle o camino', 1, 'Rectangular'), 
+('I.15(b)', 'CAMINO O CALLE SIN SALIDA', 'Indica la finalización de la calle o camino', 12, 'Rectangular'), 
 
-('I.16', 'CAMINO O PASO TRANSITABLE', 'Informa si el paso o lugar se halla habilitado al tránsito y en que condiciones', 1, 'Rectangular'), 
+('I.16', 'CAMINO O PASO TRANSITABLE', 'Informa si el paso o lugar se halla habilitado al tránsito y en que condiciones', 12, 'Rectangular'), 
 
-('I.17', 'VELOCIDADES MAXIMAS PERMITIDAS', 'Indica velocidades máximas permitidas en el país', 1, 'Rectangular'), 
+('I.17', 'VELOCIDADES MAXIMAS PERMITIDAS', 'Indica velocidades máximas permitidas en el país', 12, 'Rectangular'), 
 
-('I.18', 'ESQUEMA DE RECORRIDO', 'Orienta al conductor sobre el recorrido a seguir en caso de itinerarios especiales', 1, 'Rectangular'), 
+('I.18', 'ESQUEMA DE RECORRIDO', 'Orienta al conductor sobre el recorrido a seguir en caso de itinerarios especiales', 12, 'Rectangular'), 
 
-('I.19', 'DESVIO POR CAMBIO DE SENTIDO DE CIRCULACION', 'Orienta al conductor sobre el recorrido a seguir, ante la posibilidad de seguir por la misma vía, debido a restricciones vigentes', 1, 'Rectangular'), 
+('I.19', 'DESVIO POR CAMBIO DE SENTIDO DE CIRCULACION', 'Orienta al conductor sobre el recorrido a seguir, ante la posibilidad de seguir por la misma vía, debido a restricciones vigentes', 12, 'Rectangular'), 
 
-('I.20', 'ESTACIONAMIENTO', 'Permite estacionar en la vía, en la forma indicada', 1, 'Circular'), 
+('I.20', 'ESTACIONAMIENTO', 'Permite estacionar en la vía, en la forma indicada', 12, 'Circular'), 
 
-('I.21(a)', 'PERMITIDO GIRAR A LA DERECHA', 'se puede girar a la derecha donde no está regulado o por regla general está prohibido', 1, 'Circular'), 
+('I.21(a)', 'PERMITIDO GIRAR A LA DERECHA', 'se puede girar a la derecha donde no está regulado o por regla general está prohibido', 12, 'Circular'), 
 
-('I.21(b)', 'PERMITIDO GIRAR A LA IZQUIERDA', 'se puede girar a la izquierda donde no está regulado o por regla general está prohibido', 1, 'Circular'), 
+('I.21(b)', 'PERMITIDO GIRAR A LA IZQUIERDA', 'se puede girar a la izquierda donde no está regulado o por regla general está prohibido', 12, 'Circular'), 
 
-('I.22', 'DIRECCION PERMITIDA', 'se puede girar a la izquierda o derecha, o en cualquiera de los sentidos de las flechas indicados en la señal', 1, 'Circular'), 
+('I.22', 'DIRECCION PERMITIDA', 'se puede girar a la izquierda o derecha, o en cualquiera de los sentidos de las flechas indicados en la señal', 12, 'Circular'), 
 
-('I.22(a)', 'DIRECCION PERMITIDA (derecha)', 'se puede girar a la derecha, o en cualquiera de los sentidos indicados en la señal', 1, 'Circular'), 
+('I.22(a)', 'DIRECCION PERMITIDA (derecha)', 'se puede girar a la derecha, o en cualquiera de los sentidos indicados en la señal', 12, 'Circular'), 
 
-('I.22(b)', 'DIRECCION PERMITIDA (izquierda)', 'se puede girar a la izquierda, o en cualquiera de los sentidos indicados en la señal', 1, 'Circular'), 
+('I.22(b)', 'DIRECCION PERMITIDA (izquierda)', 'se puede girar a la izquierda, o en cualquiera de los sentidos indicados en la señal', 12, 'Circular'), 
 
-('I.22(c)', 'DIRECCION PERMITIDA (igual sentido o izquierda)', 'se puede seguir en cualquiera de los sentidos que indique la señal', 1, 'Circular'), 
+('I.22(c)', 'DIRECCION PERMITIDA (igual sentido o izquierda)', 'se puede seguir en cualquiera de los sentidos que indique la señal', 12, 'Circular'), 
 
-('I.22(d)', 'DIRECCION PERMITIDA (igual sentido o derecha)', 'se puede seguir en cualquiera de los sentidos que indique la señal', 1, 'Circular'), 
+('I.22(d)', 'DIRECCION PERMITIDA (igual sentido o derecha)', 'se puede seguir en cualquiera de los sentidos que indique la señal', 12, 'Circular'), 
 
-('I.22(e)', 'DIRECCION PERMITIDA (ambas direcciones)', 'se puede seguir en cualquiera de los sentidos que indique la señal', 1, 'Circular'), 
+('I.22(e)', 'DIRECCION PERMITIDA (ambas direcciones)', 'se puede seguir en cualquiera de los sentidos que indique la señal', 12, 'Circular'), 
 
-('I.22(f)', 'DIRECCION PERMITIDA (bifurcación)', 'se puede seguir en cualquiera de los sentidos que indique la señal', 1, 'Circular');
+('I.22(f)', 'DIRECCION PERMITIDA (bifurcación)', 'se puede seguir en cualquiera de los sentidos que indique la señal', 12, 'Circular');
 
 
 
