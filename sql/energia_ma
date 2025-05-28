@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS formularios.energia_ma
     gid  serial,
     kb_start character varying COLLATE pg_catalog."default",
     kb_end character varying COLLATE pg_catalog."default",
-    fecha date ,
+    fecha character varying COLLATE pg_catalog."default",
     kb_lonlat character varying COLLATE pg_catalog."default",
     tip_inspec character varying COLLATE pg_catalog."default",
     est_acopio_rrpp numeric,
@@ -140,6 +140,7 @@ CREATE TABLE IF NOT EXISTS formularios.energia_ma
     kb_version character varying COLLATE pg_catalog."default",
     dropped_in_kobo boolean DEFAULT false,
     kb_validation_status character varying COLLATE pg_catalog."default",
+    kb_attachments character varying COLLATE pg_catalog."default",
     CONSTRAINT energia_ma_pkey PRIMARY KEY (gid),
     CONSTRAINT unique_energia_ma_kb_uuid UNIQUE (kb_uuid)
 )
