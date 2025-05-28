@@ -1,0 +1,338 @@
+
+
+
+-- Table: formularios.energia_ma
+
+-- DROP TABLE IF EXISTS formularios.energia_ma;
+
+CREATE TABLE IF NOT EXISTS formularios.energia_ma
+(
+    gid  serial,
+    kb_start character varying COLLATE pg_catalog."default",
+    kb_end character varying COLLATE pg_catalog."default",
+    fecha date ,
+    kb_lonlat character varying COLLATE pg_catalog."default",
+    tip_inspec character varying COLLATE pg_catalog."default",
+    est_acopio_rrpp numeric,
+    oyl_rrpp numeric,
+    cart_ind_rrpp numeric,
+    bolsas_rrpp numeric,
+    hojas_seg numeric,
+    matafuego_rrpp numeric,
+    img_est_acopio_rrpp character varying COLLATE pg_catalog."default",
+    img_oyl_rrpp character varying COLLATE pg_catalog."default",
+    img_cart_ind_rrpp character varying COLLATE pg_catalog."default",
+    img_bolsas_rrpp character varying COLLATE pg_catalog."default",
+    img_hojas_seg character varying COLLATE pg_catalog."default",
+    img_matafuego_rrpp character varying COLLATE pg_catalog."default",
+    obs_rrpp character varying COLLATE pg_catalog."default",
+    oyl_tall numeric,
+    prod_quim_tall numeric,
+    kit_tall numeric,
+    seg_res_tall numeric,
+    senia_tall numeric,
+    img_oyl_tall character varying COLLATE pg_catalog."default",
+    img_prod_quim_tall character varying COLLATE pg_catalog."default",
+    img_kit_tall character varying COLLATE pg_catalog."default",
+    img_seg_res_tall character varying COLLATE pg_catalog."default",
+    img_senia_tall character varying COLLATE pg_catalog."default",
+    obs_tall character varying COLLATE pg_catalog."default",
+    oyl_alm numeric,
+    prod_quim_alm numeric,
+    kit_alm numeric,
+    seg_resi_alm numeric,
+    senia_alm numeric,
+    img_oyl_alm character varying COLLATE pg_catalog."default",
+    img_prod_quim_alm character varying COLLATE pg_catalog."default",
+    img_kit_alm character varying COLLATE pg_catalog."default",
+    img_seg_resi_alm character varying COLLATE pg_catalog."default",
+    img_senia_alm character varying COLLATE pg_catalog."default",
+    obs_alm character varying COLLATE pg_catalog."default",
+    seg_resi_com numeric,
+    compostaje_com numeric,
+    senia_com numeric,
+    img_seg_resi_com character varying COLLATE pg_catalog."default",
+    img_compostaje_com character varying COLLATE pg_catalog."default",
+    img_senia_com character varying COLLATE pg_catalog."default",
+    obs_com character varying COLLATE pg_catalog."default",
+    seg_resi_ofadm numeric,
+    oyl_ofadm numeric,
+    senia_ofadm numeric,
+    uso_agua_ofadm numeric,
+    img_seg_resi_ofadm character varying COLLATE pg_catalog."default",
+    img_oyl_ofadm character varying COLLATE pg_catalog."default",
+    img_senia_ofadm character varying COLLATE pg_catalog."default",
+    img_uso_agua_ofadm character varying COLLATE pg_catalog."default",
+    obs_oa character varying COLLATE pg_catalog."default",
+    oyl_areascom numeric,
+    est_maqui_areascom numeric,
+    seg_resi_areascom numeric,
+    senia_areascom numeric,
+    img_oyl_areascom character varying COLLATE pg_catalog."default",
+    img_maqui_areascom character varying COLLATE pg_catalog."default",
+    img_seg_resi_areascom character varying COLLATE pg_catalog."default",
+    img_senia_areascom character varying COLLATE pg_catalog."default",
+    obs_areascom character varying COLLATE pg_catalog."default",
+    maqui_areascom1 numeric,
+    senia_areascom1 numeric,
+    uso_lumi_areascom1 numeric,
+    uso_maqui_areascom1 numeric,
+    img_maqui_areascom1 character varying COLLATE pg_catalog."default",
+    img_senia_areascom1 character varying COLLATE pg_catalog."default",
+    img_uso_lumi_areascom1 character varying COLLATE pg_catalog."default",
+    img_uso_maqui_areascom1 character varying COLLATE pg_catalog."default",
+    obs_areascom1 character varying COLLATE pg_catalog."default",
+    maqui_tall1 numeric,
+    senia_tall1 numeric,
+    uso_lumi_tall1 numeric,
+    uso_maqui_tall1 numeric,
+    img_maqui_tall1 character varying COLLATE pg_catalog."default",
+    img_senia_tall1 character varying COLLATE pg_catalog."default",
+    img_uso_lumi_tall1 character varying COLLATE pg_catalog."default",
+    img_uso_maqui_tall1 character varying COLLATE pg_catalog."default",
+    obs_tall1 character varying COLLATE pg_catalog."default",
+    maqui_alm1 numeric,
+    senia_alm1 numeric,
+    uso_lumi_alm1 numeric,
+    uso_maqui_alm1 numeric,
+    img_maqui_alm1 character varying COLLATE pg_catalog."default",
+    img_senia_alm1 character varying COLLATE pg_catalog."default",
+    img_uso_lumi_alm1 character varying COLLATE pg_catalog."default",
+    img_uso_maqui_alm1 character varying COLLATE pg_catalog."default",
+    obs_alm1 character varying COLLATE pg_catalog."default",
+    equipo_ofi numeric,
+    senia_ofi numeric,
+    uso_lumi_ofi numeric,
+    uso_equipos_ofi numeric,
+    img_equipo_ofi character varying COLLATE pg_catalog."default",
+    img_senia_ofi character varying COLLATE pg_catalog."default",
+    img_uso_lumi_ofi character varying COLLATE pg_catalog."default",
+    img_uso_equipos_ofi character varying COLLATE pg_catalog."default",
+    obs_ofi character varying COLLATE pg_catalog."default",
+    equipo_com1 numeric,
+    senia_com1 numeric,
+    uso_lumi_com1 numeric,
+    uso_equipos_com1 numeric,
+    img_equipo_com1 character varying COLLATE pg_catalog."default",
+    img_senia_com1 character varying COLLATE pg_catalog."default",
+    img_uso_lumi_com1 character varying COLLATE pg_catalog."default",
+    img_uso_equipos_com1 character varying COLLATE pg_catalog."default",
+    obs_com1 character varying COLLATE pg_catalog."default",
+    equipo_peaje numeric,
+    senia_peaje numeric,
+    uso_lumi_peaje numeric,
+    uso_equipos_peaje numeric,
+    img_equipo_peaje character varying COLLATE pg_catalog."default",
+    img_senia_peaje character varying COLLATE pg_catalog."default",
+    img_uso_lumi_peaje character varying COLLATE pg_catalog."default",
+    img_uso_equipos_peaje character varying COLLATE pg_catalog."default",
+    obs_img character varying COLLATE pg_catalog."default",
+    kb_id bigint NOT NULL,
+    kb_uuid character varying COLLATE pg_catalog."default",
+    kb_tags character varying COLLATE pg_catalog."default",
+    kb_submitted_by character varying COLLATE pg_catalog."default",
+    kb_xform_id_string character varying COLLATE pg_catalog."default",
+    kb_status character varying COLLATE pg_catalog."default",
+    kb_meta_instanceid character varying COLLATE pg_catalog."default",
+    kb_formhub_uuid character varying COLLATE pg_catalog."default",
+    kb_submission_time character varying COLLATE pg_catalog."default",
+    kb_notes character varying COLLATE pg_catalog."default",
+    kb_version character varying COLLATE pg_catalog."default",
+    dropped_in_kobo boolean DEFAULT false,
+    kb_validation_status character varying COLLATE pg_catalog."default",
+    CONSTRAINT energia_ma_pkey PRIMARY KEY (gid),
+    CONSTRAINT unique_energia_ma_kb_uuid UNIQUE (kb_uuid)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS formularios.energia_ma
+    OWNER to postgres;
+
+REVOKE ALL ON TABLE formularios.energia_ma FROM ausa_reader;
+REVOKE ALL ON TABLE formularios.energia_ma FROM sololectura;
+
+GRANT SELECT ON TABLE formularios.energia_ma TO ausa_reader;
+
+GRANT ALL ON TABLE formularios.energia_ma TO mcastillo;
+
+GRANT ALL ON TABLE formularios.energia_ma TO postgres;
+
+GRANT SELECT, REFERENCES ON TABLE formularios.energia_ma TO sololectura;
+
+
+
+
+
+
+CREATE FUNCTION formularios.traducir_valor(val numeric) RETURNS text as $$
+BEGIN 
+	CASE val
+	 WHEN 0 THEN RETURN 'N/A';
+        WHEN 1 THEN RETURN 'No cumple (1)';
+        WHEN 3 THEN RETURN 'Regular (3)';
+        WHEN 5 THEN RETURN 'Cumple (5)';
+		ELSE RETURN null;
+    END CASE;
+END;
+$$ LANGUAGE plpgsql IMMUTABLE;
+
+
+-- View: formularios.v_energia_ma
+
+-- DROP MATERIALIZED VIEW IF EXISTS formularios.v_energia_ma;
+CREATE MATERIALIZED VIEW IF NOT EXISTS formularios.v_energia_ma
+TABLESPACE pg_default
+AS
+ SELECT energia_ma.gid,
+    energia_ma.kb_start,
+    energia_ma.kb_end,
+    energia_ma.fecha,
+    CASE WHEN energia_ma.tip_inspec = 'medio_ambiente'  THEN  'Medio Ambiente'
+        WHEN  energia_ma.tip_inspec ='eficiencia_energ_tica' THEN  'Eficiencia Energética'
+		
+    END  as tip_inspec,
+	
+    formularios.traducir_valor(energia_ma.est_acopio_rrpp) as est_acopio_rrpp ,
+    formularios.traducir_valor(energia_ma.oyl_rrpp) as oyl_rrpp ,
+    formularios.traducir_valor(energia_ma.cart_ind_rrpp) as cart_ind_rrpp ,
+    formularios.traducir_valor(energia_ma.bolsas_rrpp) as bolsas_rrpp ,
+    formularios.traducir_valor(energia_ma.hojas_seg ) as hojas_seg,
+    formularios.traducir_valor(energia_ma.matafuego_rrpp ) as matafuego_rrpp,
+    energia_ma.img_est_acopio_rrpp,
+    energia_ma.img_oyl_rrpp,
+    energia_ma.img_cart_ind_rrpp,
+    energia_ma.img_bolsas_rrpp,
+    energia_ma.img_hojas_seg,
+    energia_ma.img_matafuego_rrpp,
+    energia_ma.obs_rrpp,
+    formularios.traducir_valor(energia_ma.oyl_tall)as oyl_tall,
+    formularios.traducir_valor(energia_ma.prod_quim_tall)as prod_quim_tall,
+    formularios.traducir_valor(energia_ma.kit_tall)as kit_tall,
+    formularios.traducir_valor(energia_ma.seg_res_tall)as seg_res_tall,
+    formularios.traducir_valor(energia_ma.senia_tall) as senia_tall,
+    energia_ma.img_oyl_tall,
+    energia_ma.img_prod_quim_tall,
+    energia_ma.img_kit_tall,
+    energia_ma.img_seg_res_tall,
+    energia_ma.img_senia_tall,
+    energia_ma.obs_tall,
+    formularios.traducir_valor(energia_ma.oyl_alm)as oyl_alm ,
+    formularios.traducir_valor(energia_ma.prod_quim_alm)as prod_quim_alm,
+    formularios.traducir_valor(energia_ma.kit_alm)as kit_alm,
+    formularios.traducir_valor(energia_ma.seg_resi_alm)as seg_resi_alm,
+    formularios.traducir_valor(energia_ma.senia_alm)as senia_alm,
+    energia_ma.img_oyl_alm,
+    energia_ma.img_prod_quim_alm,
+    energia_ma.img_kit_alm,
+    energia_ma.img_seg_resi_alm,
+    energia_ma.img_senia_alm,
+    energia_ma.obs_alm,
+    formularios.traducir_valor(energia_ma.seg_resi_com)as seg_resi_com,
+    formularios.traducir_valor(energia_ma.compostaje_com)as compostaje_com,
+    formularios.traducir_valor(energia_ma.senia_com)as senia_com,
+    energia_ma.img_seg_resi_com,
+    energia_ma.img_compostaje_com,
+    energia_ma.img_senia_com,
+    energia_ma.obs_com,
+    formularios.traducir_valor(energia_ma.seg_resi_ofadm)as seg_resi_ofadm,
+    formularios.traducir_valor(energia_ma.oyl_ofadm)as oyl_ofadm ,
+    formularios.traducir_valor(energia_ma.senia_ofadm)as senia_ofadm,
+    formularios.traducir_valor(energia_ma.uso_agua_ofadm)as uso_agua_ofadm,
+    energia_ma.img_seg_resi_ofadm,
+    energia_ma.img_oyl_ofadm,
+    energia_ma.img_senia_ofadm,
+    energia_ma.img_uso_agua_ofadm,
+    energia_ma.obs_oa,
+    formularios.traducir_valor(energia_ma.oyl_areascom)as oyl_areascom,
+    formularios.traducir_valor(energia_ma.est_maqui_areascom)as est_maqui_areascom,
+    formularios.traducir_valor(energia_ma.seg_resi_areascom)as seg_resi_areascom,
+    formularios.traducir_valor(energia_ma.senia_areascom)as senia_areascom,
+    energia_ma.img_oyl_areascom,
+    energia_ma.img_maqui_areascom,
+    energia_ma.img_seg_resi_areascom,
+    energia_ma.img_senia_areascom,
+    energia_ma.obs_areascom,
+    formularios.traducir_valor(energia_ma.maqui_areascom1)as maqui_areascom1,
+    formularios.traducir_valor(energia_ma.senia_areascom1)as senia_areascom1,
+    formularios.traducir_valor(energia_ma.uso_lumi_areascom1)as uso_lumi_areascom1 ,
+    formularios.traducir_valor(energia_ma.uso_maqui_areascom1)as uso_maqui_areascom1,
+    energia_ma.img_maqui_areascom1,
+    energia_ma.img_senia_areascom1,
+    energia_ma.img_uso_lumi_areascom1,
+    energia_ma.img_uso_maqui_areascom1,
+    energia_ma.obs_areascom1,
+    formularios.traducir_valor(energia_ma.maqui_tall1)as maqui_tall1,
+    formularios.traducir_valor(energia_ma.senia_tall1)as senia_tall1,
+    formularios.traducir_valor(energia_ma.uso_lumi_tall1)as uso_lumi_tall1,
+    formularios.traducir_valor(energia_ma.uso_maqui_tall1)as uso_maqui_tall1,
+    energia_ma.img_maqui_tall1,
+    energia_ma.img_senia_tall1,
+    energia_ma.img_uso_lumi_tall1,
+    energia_ma.img_uso_maqui_tall1,
+    energia_ma.obs_tall1,
+    formularios.traducir_valor(energia_ma.maqui_alm1)as maqui_alm1 ,
+    formularios.traducir_valor(energia_ma.senia_alm1)as senia_alm1,
+    formularios.traducir_valor(energia_ma.uso_lumi_alm1)as uso_lumi_alm1,
+    energia_ma.uso_maqui_alm1,
+    energia_ma.img_maqui_alm1,
+    energia_ma.img_senia_alm1,
+    energia_ma.img_uso_lumi_alm1,
+    energia_ma.img_uso_maqui_alm1,
+    energia_ma.obs_alm1,
+    formularios.traducir_valor(energia_ma.equipo_ofi)as equipo_ofi,
+    formularios.traducir_valor(energia_ma.senia_ofi)as senia_ofi,
+    formularios.traducir_valor(energia_ma.uso_lumi_ofi)as uso_lumi_ofi ,
+    energia_ma.uso_equipos_ofi,
+    energia_ma.img_equipo_ofi,
+    energia_ma.img_senia_ofi,
+    energia_ma.img_uso_lumi_ofi,
+    energia_ma.img_uso_equipos_ofi,
+    energia_ma.obs_ofi,
+    formularios.traducir_valor(energia_ma.equipo_com1)as equipo_com1,
+    formularios.traducir_valor(energia_ma.senia_com1)as senia_com1,
+    formularios.traducir_valor(energia_ma.uso_lumi_com1)as uso_lumi_com1,
+    formularios.traducir_valor(energia_ma.uso_equipos_com1)as uso_equipos_com1,
+    energia_ma.img_equipo_com1,
+    energia_ma.img_senia_com1,
+    energia_ma.img_uso_lumi_com1,
+    energia_ma.img_uso_equipos_com1,
+    energia_ma.obs_com1,
+    formularios.traducir_valor(energia_ma.equipo_peaje)as equipo_peaje ,
+    formularios.traducir_valor(energia_ma.senia_peaje)as senia_peaje ,
+    formularios.traducir_valor(energia_ma.uso_lumi_peaje)as uso_lumi_peaje,
+    formularios.traducir_valor(energia_ma.uso_equipos_peaje)as uso_equipos_peaje ,
+    energia_ma.img_equipo_peaje,
+    energia_ma.img_senia_peaje,
+    energia_ma.img_uso_lumi_peaje,
+    energia_ma.img_uso_equipos_peaje,
+    energia_ma.obs_img,
+    energia_ma.kb_id,
+    energia_ma.kb_uuid,
+    energia_ma.kb_submission_time,
+    energia_ma.kb_status,
+    energia_ma.kb_notes,
+    energia_ma.kb_submitted_by,
+    energia_ma.kb_version,
+    energia_ma.kb_tags,
+	energia_ma.kb_attachments,
+    energia_ma.dropped_in_kobo,
+    NULLIF((string_to_array(energia_ma.kb_lonlat::text, ' '::text))[1], ''::text)::numeric AS latitud,
+    NULLIF((string_to_array(energia_ma.kb_lonlat::text, ' '::text))[2], ''::text)::numeric AS longitud,
+        CASE
+            WHEN length(energia_ma.kb_lonlat::text) > 1 THEN st_setsrid(st_makepoint(split_part(energia_ma.kb_lonlat::text, ' '::text, 2)::numeric::double precision, split_part(energia_ma.kb_lonlat::text, ' '::text, 1)::numeric::double precision), 4326)::geometry(Point,4326)
+            ELSE NULL::geometry(Point,4326)
+        END AS geom
+   FROM formularios.energia_ma
+WITH DATA;
+
+
+
+
+
+ALTER TABLE IF EXISTS formularios.v_energia_ma
+    OWNER TO postgres;
+
+GRANT SELECT ON TABLE formularios.v_energia_ma TO ausa_reader;
+GRANT ALL ON TABLE formularios.v_energia_ma TO postgres;
+
