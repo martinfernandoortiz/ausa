@@ -25,7 +25,9 @@ Ejemplo
 En general, ya vamos a tener los nombres de los archivos que queremos subir. Será cuestión de hacer un ilike con el nombre  y la dateAdded para ver cual es la ultima versión. 
 
 3. A partir de esto con el id del archivo se procede a la descarga
-curl "https://api.cesium.com/v1/archives/138806/download" -H "Authorization: Bearer token"
+curl -L -OJ "https://api.cesium.com/v1/archives/138806/download" \
+  -H "Authorization: Bearer token"
+mv "$(ls -t | head -n1)" /home/
 
 4. Reemplazar el archivo descargado en servidor de datos /3d_data/ifc
 
