@@ -1,0 +1,32 @@
+# CESIUM API REST
+
+1. Generar un token desde https://ion.cesium.com/tokens?page=1. 
+    Para descargas es importantes que este activado: archives:read, assets:read
+
+2. Con curl "https://api.cesium.com/v1/archives/" -H "Authorization: Bearer token"  se genera un json que contiene todos los archivos disponibles para bajar. 
+
+Ejemplo
+{
+    "items": [
+        {
+            "id": 132908,
+            "name": "MPD - RELEVAMIENTO 240926-mesh",
+            "assetIds": [
+                3114001
+            ],
+            "format": "ZIP",
+            "status": "COMPLETE",
+            "bytesArchived": 32790278,
+            "type": "FULL",
+            "dateAdded": "2025-02-18T15:04:16.870Z"
+        },
+
+
+En general, ya vamos a tener los nombres de los archivos que queremos subir. Será cuestión de hacer un ilike con el nombre  y la dateAdded para ver cual es la ultima versión. 
+
+3. A partir de esto con el id del archivo se procede a la descarga
+curl "https://api.cesium.com/v1/archives/138806/download" -H "Authorization: Bearer token"
+
+4. Reemplazar el archivo descargado en servidor de datos /3d_data/ifc
+
+5. Posibles chequeo para que impacte automaticamente: nombre vs nombres parecidos
