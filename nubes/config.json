@@ -1,0 +1,12 @@
+[
+    {
+        "type" : "readers.las",
+        "filename" : "larrazabal_v4.las"
+
+    },
+    {
+        "type" : "writers.las",
+        "a_srs": "EPSG:5348",
+        "filename" : "larrazabal_5348.las"
+    }
+]
