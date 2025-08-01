@@ -1,5 +1,6 @@
--- Data wrangling para poder armar la capa de auscultacion.
-
+-- Data wrangling para poder armar la capa de auscultacion. El motivo de todo esto es que las coordenadas están mal....
+-- ESTADO PAVIMENTOS
+-- SE USA EL EXCEL DE ESTRUCTURA QUE ESTA EN GIS/ESTADOPAVIMENTOS/2025 Y SE PASA DESDE QGIS TODO CRUDO. Si no tenemos el excel la estructura es: 
 
 -- Table: geodatos.estadopavimentos2025_r2
 
@@ -59,8 +60,7 @@ TABLESPACE pg_default;
 ALTER TABLE IF EXISTS geodatos.estadopavimentos2025_r2
     OWNER to postgres;
 
--- ESTADO PAVIMENTOS
--- SE USA EL EXCEL DE ESTRUCTURA QUE ESTA EN GIS/ESTADOPAVIMENTOS/2025 Y SE PASA DESDE QGIS TODO CRUDO. Si no tenemos el excel la estructura es: 
+
 
 
 
