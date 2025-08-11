@@ -273,6 +273,8 @@ INSERT INTO senializacion.senales (codigo, nombre, descripcion, forma, subelemen
 ('I13', 'Zona urbana', 'Indica el ingreso a un área urbana.', 'Cuadrada', 6),
 ('I14', 'Zona rural', 'Indica la salida del área urbana.', 'Cuadrada', 6),
 ('I15', 'Fin de autopista', 'Señala que finaliza un tramo de autopista.', 'Cuadrada', 6),
-('SOS', 'Emergencia', 'SOS *287', 'Rectangular', 13)
+('SOS', 'Emergencia', 'SOS *287', 'Rectangular', 13),
+('I10', 'Mojón kilométrico', 'Mojón kilométrico', 'Rectangular', 10)
+
 ;
 
