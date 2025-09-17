@@ -1,0 +1,2903 @@
+-- Inserts para llenar las tablas desde la base vieja a la nueva
+
+
+-- Mojon Kilométrico  I10 , id_elem 280
+
+INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  142 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido,
+  vs.iconografia,
+  vs.obs,
+  fmodif
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 280;
+
+
+
+-- P2(c) Curva Chevron
+
+INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  58 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido,
+  vs.iconografia,
+  vs.obs,
+  fmodif
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 226;
+
+
+
+-- id elem 206 p2b 
+
+  INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  57 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido,
+  vs.iconografia,
+  vs.obs,
+  fmodif
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 206;
+
+
+
+
+  
+-- SOS
+
+  INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  141 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido,
+  vs.iconografia,
+  vs.obs,
+  fmodif
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 283;
+
+
+
+  --
+
+
+  -- 214   i22(e)
+
+  INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  139 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido,
+  vs.iconografia,
+  vs.obs,
+  fmodif
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 214;
+
+
+
+  
+
+  -- R15 Maxima 60 PESADOS
+
+  INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif,
+  tipo_vehiculo
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  27 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  60 as contenido, -- vs.contenido
+  vs.iconografia,
+  vs.obs,
+  fmodif,
+  'Pesados' as tipo_vehiculo
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 215;
+
+
+
+-- Maxima 60 metrobus 
+  INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif,
+  tipo_vehiculo
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  27 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  60 as contenido, -- vs.contenido
+  vs.iconografia,
+  vs.obs,
+  fmodif,
+  'Metrobus' as tipo_vehiculo
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 711;
+
+  -- Maxima 60 metrobus 
+  INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif,
+  tipo_vehiculo
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  27 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  60 as contenido, -- vs.contenido
+  vs.iconografia,
+  vs.obs,
+  fmodif,
+  'Metrobus' as tipo_vehiculo
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.gid = 48514;
+
+
+
+
+  -- R15 Maxima 40
+
+  INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  27 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  40 as contenido, -- vs.contenido
+  vs.iconografia,
+  vs.obs,
+  fmodif
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 327;
+
+
+  INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  27 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  40 as contenido, -- vs.contenido
+  vs.iconografia,
+  'Máxima' as obs, --vs.obs,
+  fmodif
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 316;
+
+  -- R15(40)2 Velocidad maxima 40
+
+  INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  27 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  40 as contenido, -- vs.contenido
+  vs.iconografia,
+  'Velocidad máxima' as obs, --vs.obs,
+  fmodif
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 343;
+
+  -- R15 Maxima 20
+
+   INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  27 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  20 as contenido, -- vs.contenido
+  vs.iconografia,
+  vs.obs,
+  fmodif
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 216;
+
+
+-- R15 Maxima 100
+
+   INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  27 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  100 as contenido, -- vs.contenido
+  vs.iconografia,
+  vs.obs,
+  fmodif
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 260;
+
+  
+-- R15 Maxima 100
+
+   INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  27 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  100 as contenido, -- vs.contenido
+  vs.iconografia,
+  vs.obs,
+  fmodif
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 230;
+
+
+-- R15  maxima 60 
+  INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  27 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  60 as contenido, -- vs.contenido
+  vs.iconografia,
+  vs.obs,
+  fmodif
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 235;
+
+
+  -- R15 maxima 60 
+  INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  27 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  60 as contenido, -- vs.contenido
+  vs.iconografia,
+  'Máxima' as obs, --vs.obs,
+  fmodif
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 347;
+  
+  
+
+  -- R15 velocidad maxima 60 
+  INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  27 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  60 as contenido, -- vs.contenido
+  vs.iconografia,
+  'Velocidad máxima' as obs, --vs.obs,
+  fmodif
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 211;
+  
+  
+
+
+-- R15 maxima 80 
+  INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  27 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  80 as contenido, -- vs.contenido
+  vs.iconografia,
+  vs.obs,
+  fmodif
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 200;
+
+
+  -- R15 maxima 80  Maxima
+  INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  27 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  80 as contenido, -- vs.contenido
+  vs.iconografia,
+  'Máxima' as leyenda_extra,--vs.obs,
+  fmodif
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 209;
+  
+  
+
+  
+
+-- R15 maxima 80 
+  INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  27 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  80 as contenido, -- vs.contenido
+  vs.iconografia,
+  vs.obs,
+  fmodif
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 200;
+
+
+  -- R15 max 80 
+    INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  27 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  80 as contenido, -- vs.contenido
+  vs.iconografia,
+  vs.obs,
+  fmodif
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 255;
+
+  -- I6 
+
+  INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  116 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido, -- 60 as contenido, -- vs.contenido
+  vs.iconografia,
+  vs.obs,
+  fmodif
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 238;
+
+
+
+
+
+
+
+  -- id 328  R9
+
+    INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  20 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido, -- 60 as contenido, -- vs.contenido
+  vs.iconografia,
+  vs.obs,
+  fmodif
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 328;
+
+
+
+--R28
+
+INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  50 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido,
+  vs.iconografia,
+  vs.obs,
+  fmodif
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 321;
+
+
+-- I25 Informativos varios como anuncio 1.... 
+INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  143 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido,
+  vs.iconografia,
+  vs.obs,
+  fmodif
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 275;
+
+
+
+  -- P22
+INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  84 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido,
+  vs.iconografia,
+  vs.obs,
+  fmodif
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 222;
+
+
+
+
+
+
+
+  
+  -- R16(50)
+INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  28 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido,
+  vs.iconografia,
+  vs.obs,
+  fmodif
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 330;
+
+
+  -- R3
+
+INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  3 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido,
+  vs.iconografia,
+  vs.obs,
+  fmodif
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 249;
+
+  -- R23
+
+
+INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  45 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido,
+  vs.iconografia,
+  vs.obs,
+  fmodif
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 271;
+
+
+
+  -- P11C
+  INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  73 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido,
+  vs.iconografia,
+  vs.obs,
+  fmodif
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 322;
+
+
+
+
+  -- I25 Informativos varios como anuncio 69 velocidad controlada por radar
+INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  143 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido,
+  vs.iconografia,
+  vs.obs,
+  fmodif
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 256;
+
+
+  -- I12
+
+  INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  122 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido,
+  vs.iconografia,
+  vs.obs,
+  fmodif
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 236;
+
+
+
+
+
+  --R9 (2)
+  INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  20 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido,
+  vs.iconografia,
+  vs.obs,
+  fmodif
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 284;
+
+
+
+
+
+  -- Atencion no ingresar o circular vehiculos..... 
+
+
+  INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  144 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido,
+  vs.iconografia,
+  vs.obs,
+  fmodif
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 318;
+
+
+
+
+
+  -- Atencion velocidad controlada por radar ..... 
+
+
+  INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  144 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido,
+  vs.iconografia,
+  vs.obs,
+  fmodif
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 234;
+
+
+
+  -- R11a
+
+
+  INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  22 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido,
+  vs.iconografia,
+  vs.obs,
+  fmodif
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 643;
+
+
+--P7a
+
+
+  -- P7a
+
+  INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  63 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido,
+  vs.iconografia,
+  vs.obs,
+  fmodif
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 342;
+
+-- Zona fragil
+
+  INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  145 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido,
+  vs.iconografia,
+  vs.obs,
+  fmodif
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 297;
+
+
+
+--R3(6)
+  INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  9 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido,
+  vs.iconografia,
+  vs.obs,
+  fmodif
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 338;
+
+
+
+--R3(3)
+  INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  6 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido,
+  vs.iconografia,
+  vs.obs,
+  fmodif
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 323;
+
+
+
+
+--AUSA1 -- Exclusivo telepase 
+  INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  146 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido,
+  vs.iconografia,
+  vs.obs,
+  fmodif
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 418;
+
+
+  -- ATM
+
+    INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  147 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido,
+  vs.iconografia,
+  vs.obs,
+  fmodif
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 162;
+
+
+  -- R23
+  INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  45 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido,
+  vs.iconografia,
+  vs.obs,
+  fmodif
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 262;
+
+
+
+
+
+
+-- P5
+  INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  61 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido,
+  vs.iconografia,
+  vs.obs,
+  fmodif
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 311;
+
+
+
+  -- No arroje basura - use cinturon de seguridad
+  INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  143 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido,
+  vs.iconografia,
+  vs.obs,
+  fmodif
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 331;
+
+--  R3(4)
+  INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  7 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido,
+  vs.iconografia,
+  vs.obs,
+  fmodif
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 202;
+
+
+
+  -- R25 Puesto de control
+  INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  47 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido,
+  vs.iconografia,
+  vs.obs,
+  fmodif
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 231;
+
+
+
+  -- R3(7)
+  INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  10 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido,
+  vs.iconografia,
+  vs.obs,
+  fmodif
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 268;
+
+
+
+-- R6
+
+  INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  17 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  contenido, -- vs.contenido
+  vs.iconografia,
+  vs.obs, --vs.obs,
+  fmodif
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 228;
+
+
+
+
+-- R12
+
+  INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  24 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido, -- vs.contenido
+  vs.iconografia,
+  vs.obs, --vs.obs,
+  fmodif
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 243;
+
+
+-- P32 semaforos
+  INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  103 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido, -- vs.contenido
+  vs.iconografia,
+  vs.obs, --vs.obs,
+  fmodif
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 302;
+
+
+
+-- I13 fin de autopista
+  INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  123 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido, -- vs.contenido
+  vs.iconografia,
+  vs.obs, --vs.obs,
+  fmodif
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 340;
+
+
+
+-- R25 Peaje
+  INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  47 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido, -- vs.contenido
+  vs.iconografia,
+  vs.obs, --vs.obs,
+  fmodif
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 290;
+
+
+
+-- Pase con Telepase - Solicita tu telepase aqui
+  INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  148 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido, -- vs.contenido
+  vs.iconografia,
+  vs.obs, --vs.obs,
+  fmodif
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 294;
+
+
+
+-- Disfruta la ciudad de todos los argentinos
+  INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  146 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido, -- vs.contenido
+  vs.iconografia,
+  vs.obs, --vs.obs,
+  fmodif
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 269;
+
+
+
+
+-- Semaforo rojo no avanzar
+  INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  144 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido, -- vs.contenido
+  vs.iconografia,
+  vs.obs, --vs.obs,
+  fmodif
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 336;
+
+
+
+  -- R21(c)
+
+  INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  41 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido, -- vs.contenido
+  vs.iconografia,
+  vs.obs,
+  fmodif --,
+  --vs.tipo_vehiculo
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 339;
+
+
+
+  -- I11
+
+  INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  121 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido, -- vs.contenido
+  vs.iconografia,
+  vs.obs,
+  fmodif--,,
+  --,vs.tipo_vehiculo
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 346;
+
+
+
+
+  INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif,
+  
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  19 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido, -- vs.contenido
+  vs.iconografia,
+  vs.obs,
+  fmodif--,,
+  --,vs.tipo_vehiculo
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 349;
+
+
+
+  -- I14
+
+  INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif,
+  
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  124 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido, -- vs.contenido
+  vs.iconografia,
+  vs.obs,
+  fmodif--,,
+  --,vs.tipo_vehiculo
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 221;
+
+
+   -- Darsena de emergencia a xxx metros
+
+  INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+  
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  151 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido, -- vs.contenido
+  vs.iconografia,
+  vs.obs,
+  fmodif--,,
+  --,vs.tipo_vehiculo
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem in ( 244,254,278,208);
+
+
+
+  -- i9
+
+  INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  151 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido, -- vs.contenido
+  vs.iconografia,
+  vs.obs,
+  fmodif
+  -- vs.tipo_vehiculo
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem in ( 279);
+
+
+
+  -- i6(48)
+
+  INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  151 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido, -- vs.contenido
+  vs.iconografia,
+  vs.obs,
+  fmodif
+  -- vs.tipo_vehiculo
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem in ( 492);
+
+
+    INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  143 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido, -- vs.contenido
+  vs.iconografia,
+  vs.obs,
+  fmodif
+  -- vs.tipo_vehiculo
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem in ( 210);
+
+
+   -- P2(B)
+    INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  57 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido, -- vs.contenido
+  vs.iconografia,
+  vs.obs,
+  fmodif
+  -- vs.tipo_vehiculo
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem in ( 237);
+
+
+
+
+ -- Anuncio 14
+    INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  144 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido, -- vs.contenido
+  vs.iconografia,
+  vs.obs,
+  fmodif
+  -- vs.tipo_vehiculo
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem in ( 246);
+
+   -- R4(a)
+    INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  14 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido, -- vs.contenido
+  vs.iconografia,
+  vs.obs,
+  fmodif
+  -- vs.tipo_vehiculo
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem in ( 261);
+
+
+
+ -- P4
+    INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  60 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido, -- vs.contenido
+  vs.iconografia,
+  vs.obs,
+  fmodif
+  -- vs.tipo_vehiculo
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem in ( 285);
+
+
+
+ -- R2
+    INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  2 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido, -- vs.contenido
+  vs.iconografia,
+  vs.obs,
+  fmodif
+  -- vs.tipo_vehiculo
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem in ( 319);
+
+
+    -- R15 Maxima 100 Velocidad máxima
+
+  INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  27 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  100 as contenido, -- vs.contenido
+  vs.iconografia,
+  'Velocidad máxima' as obs, --vs.obs,
+  fmodif
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem = 345;
+
+
+   -- R2
+    INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  2 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido, -- vs.contenido
+  vs.iconografia,
+  vs.obs,
+  fmodif
+  -- vs.tipo_vehiculo
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem in ( 319);
+
+
+
+
+ -- I6 117 Atención controle sus frenos
+    INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  116 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido, -- vs.contenido
+  vs.iconografia,
+  vs.obs,
+  fmodif
+  -- vs.tipo_vehiculo
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem in ( 457);
+
+
+
+
+ -- I6 56 Atención controle sus frenos
+    INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  116 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido, -- vs.contenido
+  vs.iconografia,
+  vs.obs,
+  fmodif
+  -- vs.tipo_vehiculo
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem in ( 499);
+
+
+
+
+ -- I6 88 Atención controle sus frenos
+    INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  116 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido, -- vs.contenido
+  vs.iconografia,
+  vs.obs,
+  fmodif
+  -- vs.tipo_vehiculo
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem in ( 626);
+
+   -- I6 88 Atención controle sus frenos
+    INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  116 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido, -- vs.contenido
+  vs.iconografia,
+  vs.obs,
+  fmodif
+  -- vs.tipo_vehiculo
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem in ( 629);
+
+
+
+   -- I9
+    INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  119 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido, -- vs.contenido
+  vs.iconografia,
+  vs.obs,
+  fmodif
+  -- vs.tipo_vehiculo
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem in ( 227);
+
+
+
+ -- I25
+    INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  143 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido, -- vs.contenido
+  vs.iconografia,
+  vs.obs,
+  fmodif
+  -- vs.tipo_vehiculo
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem in ( 250);
+
+
+
+
+ -- p18
+    INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  80 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido, -- vs.contenido
+  vs.iconografia,
+  vs.obs,
+  fmodif
+  -- vs.tipo_vehiculo
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.id_elem in ( 289);
+
+   -- p25a
+    INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  90 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido, -- vs.contenido
+  'p25a.png' as iconografia, --vs.iconografia,
+  vs.obs,
+  fmodif
+  -- vs.tipo_vehiculo
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+ gid in (47352,49951);
+
+
+
+ -- I6 parque de la ciudad
+
+  INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  116 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  'Parque de la Ciudad' as contenido, --vs.contenido, -- vs.contenido
+  vs.iconografia,
+  vs.obs, --vs.obs,
+  fmodif
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  gid = 47761;
+
+
+   -- id elem 334
+  INSERT INTO senializacion.senializacionvertical (
+  id_tramo,
+  id_banda,
+  id_senal,
+  forma,
+  dimensiones,
+  soporte,
+  id_soporte,
+  pk,
+  contenido,
+  imagen,
+  leyenda_extra,
+  fmodif
+  
+)
+SELECT
+  vs.id_tramo,
+  vs.id_banda,
+  27 AS id_senal,
+  vs.forma,
+  vs.dimensiones,
+  vs.soporte,
+  vs.id_soporte,
+  vs.pk,
+  vs.contenido, -- vs.contenido
+  'i6.png' as imagen,
+  vs.obs,
+  fmodif
+FROM
+  gisdata.v_senializacionvertical AS vs
+WHERE
+  vs.gid in ( 49769, 48514);
