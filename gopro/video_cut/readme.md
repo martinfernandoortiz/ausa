@@ -3,12 +3,12 @@
 Corta y divide los videos. Sirve para eliminar fuera de traza o en los casos donde en un video hay varios tramos. 
 
 
-Funcionalidad Principal
-Corte de Video (Base): Permite especificar un tiempo de inicio (-start) y/o un tiempo de finalización (-end) absolutos (en formato HH:MM:SS) para extraer un segmento del video.
+### Funcionalidad Principal
+<li> Corte de Video (Base): Permite especificar un tiempo de inicio (-start) y/o un tiempo de finalización (-end) absolutos (en formato HH:MM:SS) para extraer un segmento del video.
 
-División de Video (Split): Si se usa el argumento -split, divide el rango de tiempo especificado por -start y -end en dos archivos de salida distintos, nombrando cada uno con los argumentos -o1 y -o2.
+<li> División de Video (Split): Si se usa el argumento -split, divide el rango de tiempo especificado por -start y -end en dos archivos de salida distintos, nombrando cada uno con los argumentos -o1 y -o2.
 
-Llamada a Script Secundario: Después de un corte (simple o dividido) exitoso, llama y ejecuta un script Python externo llamado clean_data.py, pasándole los nombres del video original, los tiempos de corte y los nombres de los nuevos videos como argumentos.
+<li>Llamada a Script Secundario: Después de un corte (simple o dividido) exitoso, llama y ejecuta un script Python externo llamado clean_data.py, pasándole los nombres del video original, los tiempos de corte y los nombres de los nuevos videos como argumentos.
 
 ### Considerar
 <li>Carpeta input: dispone el video en cuestión
@@ -17,7 +17,9 @@ Llamada a Script Secundario: Después de un corte (simple o dividido) exitoso, l
 
 ### Ejemplo de ejecución en consola
 Desde la carpeta gopro2geo
-<li> ``` python + video_cut.py ```  Ejecución de python y archivo
+<li>~~~ 
+  python + video_cut.py
+ ~~~  Ejecución de python y archivo
 <li> ``` <<nombredevideo.mp4>>
   ```
 <li>-start 00:00:10  Segundos iniciales a removar
