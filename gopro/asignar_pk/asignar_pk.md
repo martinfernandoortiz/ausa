@@ -33,3 +33,7 @@ Tras procesar e insertar exitosamente los datos de un CSV, mueve ese archivo de 
 ### Finalización
 Cierra la conexión a la base de datos al finalizar.
 
+#########################################################################################################################
+
+Al insertar en la base de datos se ejecuta un trigger que busca la pk más cercana.
+Esto se puede ver en fn_asignar_pk.sql
